@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inoya - E-commerce Dress Shop
 
-## Getting Started
+A modern, elegant e-commerce website for beautiful dresses built with Next.js and React.
 
-First, run the development server:
+## 🌟 Features
+
+- **Modern UI/UX** - Built with shadcn/ui components and Tailwind CSS
+- **Multi-language Support** - English and Russian translations
+- **Dark/Light Theme** - Seamless theme switching
+- **Responsive Design** - Mobile-first approach
+- **E-commerce Ready** - Product catalog, cart, checkout flow
+- **Admin Panel** - Product and order management
+- **Content Management** - Lookbook, Journal, and Community pages
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS v4, shadcn/ui
+- **State Management**: Zustand
+- **Forms**: React Hook Form + Zod validation
+- **Database**: Prisma ORM
+- **Authentication**: NextAuth.js
+- **Payments**: Stripe integration
+- **File Uploads**: UploadThing
+
+## 🚀 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/anapiyani/inoya.git
+   cd inoya
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 📱 Pages Structure
+
+- **Homepage** - Hero section, featured products, categories
+- **Search** - Product search with advanced filters
+- **Lookbook** - Curated style collections and outfits
+- **Cart** - Shopping cart and checkout process
+- **Profile** - User account management
+- **Admin** - Administrative dashboard
+- **Journal** - Fashion blog and style tips
+- **Inoya's Girls** - Community and ambassadors
+
+## 🎨 Design Features
+
+- Beautiful, modern interface with clean typography
+- Smooth animations and transitions
+- Interactive product galleries
+- Mobile-optimized navigation
+- Accessible design principles
+- Language switcher (EN/RU)
+- Theme toggle (Light/Dark mode)
+
+## 🔧 Development
+
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **TypeScript** - Type safety
+- **Hot Reload** - Fast development experience
+
+## 📦 Build & Deploy
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤝 Contributing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📄 License
 
-## Learn More
+This project is licensed under the MIT License.
 
-To learn more about Next.js, take a look at the following resources:
+## 💎 About Inoya
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Inoya is a premium dress boutique offering elegant, high-quality dresses for every occasion. From casual day wear to stunning evening gowns, we curate beautiful pieces that celebrate feminine style and confidence.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ by [anapiyani](https://github.com/anapiyani)

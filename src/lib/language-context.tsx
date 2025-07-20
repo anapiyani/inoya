@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, type ReactNode, useContext, useState } from 'react';
 
 type Language = 'en' | 'ru';
 
@@ -13,56 +13,90 @@ interface LanguageContextType {
 const translations = {
   en: {
     'nav.home': 'Home',
-    'nav.search': 'Search',
-    'nav.lookbook': 'Lookbook',
-    'nav.journal': 'Journal',
-    'nav.girls': "Inoya's Girls",
-    'hero.title': 'Welcome to Inoya',
-    'hero.subtitle': 'Discover beautiful, elegant dresses for every occasion. From casual day wear to stunning evening gowns.',
-    'button.shopNow': 'Shop Now',
-    'button.viewLookbook': 'View Lookbook',
-    'card.newArrivals': 'New Arrivals',
-    'card.newArrivals.desc': 'Check out our latest collection of stunning dresses',
-    'card.lookbook': 'Lookbook & Sets',
-    'card.lookbook.desc': 'Curated style collections and complete outfits',
-    'card.journal': "Inoya's Journal",
-    'card.journal.desc': 'Fashion stories, style tips, and inspiration',
-    'button.exploreNew': 'Explore New',
-    'button.viewSets': 'View Sets',
-    'button.readMore': 'Read More',
-    'footer.rights': '© 2024 Inoya. All rights reserved.',
+    catalog: 'Catalog',
+    newArrivals: 'New Arrivals',
+    all: 'All',
+    dress: 'Dresses',
+    corsets: 'Corsets',
+    skirts: 'Skirts',
+    tops_blouses: 'Tops & Blouses',
+    sleeves: 'Sleeves',
+    outerwear: 'Outerwear',
+    wedding_dresses: 'Wedding Dresses',
+    lookbook_sets: 'Lookbook/Sets',
+    accessories: 'Accessories',
+    shoes: 'Shoes',
+    sale: 'Sale',
+    sizing_guide: 'Sizing Guide',
+    tailoring_to_measure: 'Tailoring to Measure',
+    gift_certificates: 'Gift Certificates',
+    inoyas_journal: 'INOYÁ Journal',
+    inoyas_girls: "INOYÁ'S Girls",
+    delivery_and_payment: 'Delivery and Payment',
+    refund_policy: 'Refund Policy',
+    support_center: 'Support Center',
+    Show_new_arrivals: 'Show New Arrivals',
+    cooperation: 'Cooperation',
+    goodsCatalog: 'Goods Catalog',
+    go_to_the_catalog: 'Browse Catalog',
+    loadMore: 'Load More',
+    faq: 'FAQ',
+    adress_of_the_company:
+      'Adress: Kazakhstan, Almaty, Al-Farabi Avenue, 47/79, № 2, 9th floor, office 39.',
+    look_at_lookbook:
+      'Look through our lookbook, where you will find curated outfits and collections that help you create a unique and stylish look',
+    about_us: 'About Us',
+    go_to_the_lookbook: 'Browse Lookbook',
     'language.en': 'EN',
-    'language.ru': 'RU'
+    'language.ru': 'RU',
   },
   ru: {
     'nav.home': 'Главная',
-    'nav.search': 'Поиск',
-    'nav.lookbook': 'Лукбук',
-    'nav.journal': 'Журнал',
-    'nav.girls': 'Девочки Inoya',
-    'hero.title': 'Добро пожаловать в Inoya',
-    'hero.subtitle': 'Откройте для себя красивые, элегантные платья на любой случай. От повседневной одежды до потрясающих вечерних нарядов.',
-    'button.shopNow': 'Купить сейчас',
-    'button.viewLookbook': 'Посмотреть лукбук',
-    'card.newArrivals': 'Новинки',
-    'card.newArrivals.desc': 'Посмотрите нашу новую коллекцию потрясающих платьев',
-    'card.lookbook': 'Лукбук и образы',
-    'card.lookbook.desc': 'Кураторские коллекции стилей и полные образы',
-    'card.journal': 'Журнал Inoya',
-    'card.journal.desc': 'Истории моды, советы по стилю и вдохновение',
-    'button.exploreNew': 'Изучить новинки',
-    'button.viewSets': 'Посмотреть образы',
-    'button.readMore': 'Читать далее',
-    'footer.rights': '© 2024 Inoya. Все права защищены.',
+    catalog: 'Каталог',
+    go_to_the_catalog: 'Перейти в каталог',
+    newArrivals: 'Новинки',
+    loadMore: 'Загрузить еще',
+    goodsCatalog: 'Каталог товаров',
+    all: 'Все',
+    dress: 'Платья',
+    corsets: 'Корсеты',
+    Show_new_arrivals: 'Показать новинки',
+    skirts: 'Юбки',
+    tops_blouses: 'Топы и блузы',
+    sleeves: 'Рукава',
+    outerwear: 'Верхняя одежда',
+    wedding_dresses: 'Свадебные платья',
+    lookbook_sets: 'Лукбук/Сеты',
+    accessories: 'Аксессуары',
+    shoes: 'Обувь',
+    sale: 'Распродажа',
+    sizing_guide: 'Размерная сетка',
+    tailoring_to_measure: 'Пошив на заказ',
+    gift_certificates: 'Подарочные сертификаты',
+    inoyas_journal: 'Журнал INOYÁ',
+    inoyas_girls: 'Девочки INOYÁ',
+    delivery_and_payment: 'Доставка и оплата',
+    refund_policy: 'Политика возврата',
+    support_center: 'Центр поддержки',
+    cooperation: 'Сотрудничество',
+    faq: 'Часто задаваемые вопросы',
+    adress_of_the_company:
+      'Казахстан, г. Алматы, проспект Аль-Фараби, 47/79, № 2, 9-й этаж, офис 39.',
+    look_at_lookbook:
+      'Просмотрите наш lookbook, где вы вы найдете подобранные образы и коллекции, которые помогут вам создать уникальный и модный образ',
+    about_us: 'О нас',
+    go_to_the_lookbook: 'Перейти на страницу lookbook',
     'language.en': 'EN',
-    'language.ru': 'RU'
-  }
+    'language.ru': 'RU',
+  },
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('ru');
 
   const t = (key: string): string => {
     return translations[language][key as keyof typeof translations.en] || key;

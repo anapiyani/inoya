@@ -1,13 +1,11 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Heart, Menu, Moon, Search, ShoppingBag, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { MobileMenu } from './mobile-menu';
 
 export function Header() {
-  const { setTheme, theme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -34,7 +32,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 right-0 left-0 z-30 border-b border-gray-200 bg-white transition-transform duration-300 dark:bg-black ${
+        className={`fixed top-0 right-0 left-0 z-30 border-b border-gray-200 bg-white transition-transform duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
@@ -62,22 +60,9 @@ export function Header() {
                 1
               </span>
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              {theme === 'dark' ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </Button>
           </div>
         </div>
       </header>
-
-      {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}

@@ -1,13 +1,26 @@
+'use client';
+
+import Link from 'next/link';
+
 interface ProductCardProps {
+  id?: string;
   image: string;
   price: string;
   title: string;
   badge?: string;
+  className?: string;
 }
 
-export function ProductCard({ image, price, title, badge }: ProductCardProps) {
-  return (
-    <div className="group cursor-pointer">
+export function ProductCard({
+  id,
+  image,
+  price,
+  title,
+  badge,
+  className,
+}: ProductCardProps) {
+  const cardContent = (
+    <div className={`group cursor-pointer ${className}`}>
       <div className="relative mb-4 aspect-[3/4] overflow-hidden bg-gray-100">
         {badge && (
           <div className="absolute top-4 right-4 z-10 rounded-full bg-black px-3 py-1 text-sm text-white">
@@ -26,4 +39,14 @@ export function ProductCard({ image, price, title, badge }: ProductCardProps) {
       </div>
     </div>
   );
+
+  if (id) {
+    return (
+      <Link href={`/product/${id}`} className="block">
+        {cardContent}
+      </Link>
+    );
+  }
+
+  return cardContent;
 }

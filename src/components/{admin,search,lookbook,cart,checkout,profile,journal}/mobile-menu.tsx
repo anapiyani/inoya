@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/language-context';
 import { ChevronDown, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
-import { catalogItems } from '../product/catalog';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -15,11 +14,23 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { language, setLanguage, t } = useLanguage();
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
+  const catalogItems = [
+    { label: 'newArrivals', href: '/catalog?category=newArrivals' },
+    { label: 'all', href: '/catalog' },
+    { label: 'dress', href: '/catalog?category=dress' },
+    { label: 'corsets', href: '/catalog?category=corsets' },
+    { label: 'skirts', href: '/catalog?category=skirts' },
+    { label: 'tops_blouses', href: '/catalog?category=tops_blouses' },
+    { label: 'sleeves', href: '/catalog?category=sleeves' },
+    { label: 'outerwear', href: '/catalog?category=outerwear' },
+    { label: 'wedding_dresses', href: '/catalog?category=wedding_dresses' },
+  ];
+
   return (
     <>
       {isOpen && (
         <div
-          className="bg-opacity-30 fixed inset-0 z-40 bg-gray-200 dark:bg-gray-700"
+          className="bg-opacity-30 fixed inset-0 z-50 bg-gray-200 dark:bg-gray-700"
           onClick={onClose}
         />
       )}
@@ -38,6 +49,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
 
             <nav className="space-y-4 overflow-y-auto">
+              {/* Catalog Section */}
               <div>
                 <button
                   onClick={() => setIsCatalogOpen(!isCatalogOpen)}
@@ -58,6 +70,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         href={item.href}
                         key={index}
                         className="block text-sm hover:text-gray-600"
+                        onClick={onClose}
                       >
                         {t(item.label)}
                       </a>
@@ -65,6 +78,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   </div>
                 )}
               </div>
+
+              {/* Other Menu Items */}
               <a href="#" className="block text-lg hover:text-gray-600">
                 {t('lookbook_sets')}
               </a>

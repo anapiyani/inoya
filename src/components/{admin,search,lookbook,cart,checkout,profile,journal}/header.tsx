@@ -2,10 +2,12 @@
 
 import { Button } from '@/components/ui/button';
 import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { MobileMenu } from './mobile-menu';
 
 export function Header() {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -15,10 +17,8 @@ export function Header() {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down & past 100px
         setIsVisible(false);
       } else {
-        // Scrolling up
         setIsVisible(true);
       }
 
@@ -45,7 +45,14 @@ export function Header() {
             <Menu className="h-6 w-6" />
           </Button>
 
-          <h1 className="text-2xl font-bold tracking-wider">INOYÁ</h1>
+          <h1
+            className="cursor-pointer text-2xl font-bold tracking-wider"
+            onClick={() => {
+              router.push('/');
+            }}
+          >
+            INOYÁ
+          </h1>
 
           <div className="flex items-center space-x-2">
             <Button variant="ghost" size="icon">

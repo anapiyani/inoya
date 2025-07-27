@@ -1,6 +1,7 @@
 'use client';
 
 import { mockProducts } from '@/components/catalog';
+import { Header } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -11,7 +12,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { FilterSidebar } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/catalog-filter';
-import { Header } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/header';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useLanguage } from '@/lib/language-context';
 import { Filter, Grid, List, Search } from 'lucide-react';

@@ -1,16 +1,21 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/lib/cart-count-context';
+import { useWishlist } from '@/lib/wishlist-context';
 import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { MobileMenu } from './mobile-menu';
+import { MobileMenu } from '../{admin,search,lookbook,cart,checkout,profile,journal}/mobile-menu';
 
 export function Header() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { wishlistItems } = useWishlist();
+  const { getCartCount } = useCart();
 
   useEffect(() => {
     const controlHeader = () => {
@@ -28,6 +33,8 @@ export function Header() {
     window.addEventListener('scroll', controlHeader);
     return () => window.removeEventListener('scroll', controlHeader);
   }, [lastScrollY]);
+
+  const cartCount = getCartCount();
 
   return (
     <>
@@ -58,15 +65,26 @@ export function Header() {
             <Button variant="ghost" size="icon">
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
-              <Heart className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                1
-              </span>
-            </Button>
+            <Link href="/wishlist">
+              <Button variant="ghost" size="icon" className="relative">
+                <Heart className="h-5 w-5" />
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                    {wishlistItems.length}
+                  </span>
+                )}
+              </Button>
+            </Link>
+            <Link href="/cart">
+              <Button variant="ghost" size="icon" className="relative">
+                <ShoppingBag className="h-5 w-5" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                    {cartCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
           </div>
         </div>
       </header>

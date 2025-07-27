@@ -1,6 +1,7 @@
 'use client';
 
 import Icons from '@/components/icons/Icons';
+import { Header } from '@/components/layout/header';
 import { catalogItems } from '@/components/product/catalog';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +12,6 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { CategoryCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/category-card';
-import { Header } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/header';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useLanguage } from '@/lib/language-context';
 import { AnimatePresence, motion } from 'framer-motion';

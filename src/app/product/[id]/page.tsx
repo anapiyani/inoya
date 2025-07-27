@@ -1,5 +1,6 @@
 'use client';
 
+import { Header } from '@/components/layout/header';
 import { ColorSelector } from '@/components/product/color-selector';
 import { ImageGallery } from '@/components/product/image-gallery';
 import {
@@ -13,8 +14,9 @@ import { ReviewsSection } from '@/components/product/reviews-section';
 import { SizeSelector } from '@/components/product/size-selector';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Header } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/header';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
+import { useCart } from '@/lib/cart-count-context';
+import { useWishlist } from '@/lib/wishlist-context';
 import {
   Heart,
   RotateCcw,
@@ -35,7 +37,8 @@ export default function ProductPage() {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
 
   const handleColorChange = (colorName: string) => {
     const variant = product.variants.find((v) => v.color === colorName);
@@ -50,13 +53,18 @@ export default function ProductPage() {
       alert('Пожалуйста, выберите размер');
       return;
     }
-    // Add to cart logic
-    console.log('Added to cart:', {
-      product: product.name,
-      variant: selectedVariant.color,
+
+    addToCart({
+      productId: product.id,
+      name: product.name,
+      price: selectedVariant.price,
+      image: selectedVariant.images[0],
+      color: selectedVariant.color,
       size: selectedSize,
       quantity,
+      badge: product.badge,
     });
+
     alert('Товар добавлен в корзину!');
   };
 
@@ -170,13 +178,25 @@ export default function ProductPage() {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => setIsWishlisted(!isWishlisted)}
+                    onClick={() =>
+                      isInWishlist(product.id)
+                        ? removeFromWishlist(product.id)
+                        : addToWishlist({
+                            id: product.id,
+                            name: product.name,
+                            image: selectedVariant.images[0],
+                            price: selectedVariant.price.toLocaleString(),
+                            badge: product.badge,
+                          })
+                    }
                     className={
-                      isWishlisted ? 'border-red-500 text-red-500' : ''
+                      isInWishlist(product.id)
+                        ? 'border-red-500 text-red-500'
+                        : ''
                     }
                   >
                     <Heart
-                      className={`h-5 w-5 ${isWishlisted ? 'fill-current' : ''}`}
+                      className={`h-5 w-5 ${isInWishlist(product.id) ? 'fill-current' : ''}`}
                     />
                   </Button>
                 </div>
@@ -208,15 +228,11 @@ export default function ProductPage() {
               </div>
             </div>
           </div>
-
-          {/* Reviews Section */}
           <ReviewsSection
             reviews={product.reviews}
             averageRating={product.averageRating}
             totalReviews={product.totalReviews}
           />
-
-          {/* Similar Products */}
           <div className="mt-16">
             <h3 className="mb-8 text-2xl font-bold">Похожие товары</h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

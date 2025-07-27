@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@/components/theme-provider';
+import { CartProvider } from '@/lib/cart-count-context';
 import { LanguageProvider } from '@/lib/language-context';
+import { WishlistProvider } from '@/lib/wishlist-context';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type React from 'react';
@@ -18,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -26,7 +28,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <WishlistProvider>
+              <CartProvider>{children}</CartProvider>
+            </WishlistProvider>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

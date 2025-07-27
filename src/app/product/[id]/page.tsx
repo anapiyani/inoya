@@ -16,6 +16,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useCart } from '@/lib/cart-count-context';
+import { useLanguage } from '@/lib/language-context';
 import { useWishlist } from '@/lib/wishlist-context';
 import {
   Heart,
@@ -29,6 +30,7 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 export default function ProductPage() {
+  const { t } = useLanguage();
   const params = useParams();
   const productId = params.id as string;
 
@@ -92,21 +94,19 @@ export default function ProductPage() {
 
       <div className="pt-20">
         <div className="container mx-auto px-4 py-8">
-          {/* Breadcrumb */}
           <nav className="mb-8 text-sm text-gray-600">
             <a href="/" className="hover:text-gray-900">
-              Главная
+              {t('home')}
             </a>
             <span className="mx-2">/</span>
             <a href="/catalog" className="hover:text-gray-900">
-              Каталог
+              {t('catalog')}
             </a>
             <span className="mx-2">/</span>
             <span className="text-gray-900">{product.name}</span>
           </nav>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            {/* Product Images */}
             <div>
               <ImageGallery
                 images={selectedVariant.images}
@@ -114,9 +114,7 @@ export default function ProductPage() {
               />
             </div>
 
-            {/* Product Info */}
             <div className="space-y-6">
-              {/* Title and Badges */}
               <div>
                 <div className="mb-2 flex items-center gap-2">
                   {product.isNew && <Badge variant="secondary">NEW</Badge>}
@@ -135,7 +133,7 @@ export default function ProductPage() {
                 {selectedVariant.price.toLocaleString()} тг
                 {!isInStock && (
                   <span className="ml-2 text-lg text-red-600">
-                    (Нет в наличии)
+                    ({t('out_of_stock')})
                   </span>
                 )}
               </div>
@@ -173,7 +171,7 @@ export default function ProductPage() {
                     className="flex-1 bg-black text-white hover:bg-gray-800"
                   >
                     <ShoppingCart className="mr-2 h-5 w-5" />
-                    Добавить в корзину
+                    {t('addToCart')}
                   </Button>
                   <Button
                     variant="outline"
@@ -207,7 +205,7 @@ export default function ProductPage() {
                   className="w-full border-black bg-transparent text-black hover:bg-black hover:text-white"
                 >
                   <Zap className="mr-2 h-5 w-5" />
-                  Купить в один клик
+                  {t('buy_now')}
                 </Button>
               </div>
 
@@ -215,15 +213,15 @@ export default function ProductPage() {
               <div className="grid grid-cols-1 gap-4 border-t pt-6 sm:grid-cols-3">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <Truck className="h-4 w-4" />
-                  <span>Бесплатная доставка</span>
+                  <span>{t('free_shipping')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <RotateCcw className="h-4 w-4" />
-                  <span>Возврат 14 дней</span>
+                  <span>{t('returns_14_days')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <Shield className="h-4 w-4" />
-                  <span>Гарантия качества</span>
+                  <span>{t('quality_guarantee')}</span>
                 </div>
               </div>
             </div>
@@ -234,7 +232,7 @@ export default function ProductPage() {
             totalReviews={product.totalReviews}
           />
           <div className="mt-16">
-            <h3 className="mb-8 text-2xl font-bold">Похожие товары</h3>
+            <h3 className="mb-8 text-2xl font-bold">{t('similar_products')}</h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {similarProducts.map((product) => (
                 <ProductCard

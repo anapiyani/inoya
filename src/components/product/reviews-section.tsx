@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/language-context';
 import { Star } from 'lucide-react';
 
 interface Review {
@@ -22,6 +23,7 @@ export function ReviewsSection({
   averageRating,
   totalReviews,
 }: ReviewsSectionProps) {
+  const { t } = useLanguage();
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star
@@ -34,7 +36,7 @@ export function ReviewsSection({
   return (
     <div className="space-y-6">
       <div className="border-t pt-8">
-        <h3 className="mb-4 text-xl font-bold">Отзывы покупателей</h3>
+        <h3 className="mb-4 text-xl font-bold">{t('customer_reviews')}</h3>
 
         {/* Rating Summary */}
         <div className="mb-6 flex items-center gap-4">
@@ -42,7 +44,9 @@ export function ReviewsSection({
             <div className="flex">{renderStars(Math.round(averageRating))}</div>
             <span className="font-medium">{averageRating.toFixed(1)}</span>
           </div>
-          <span className="text-gray-600">({totalReviews} отзывов)</span>
+          <span className="text-gray-600">
+            ({totalReviews} {t('reviews')})
+          </span>
         </div>
 
         {/* Reviews List */}
@@ -64,7 +68,7 @@ export function ReviewsSection({
         </div>
 
         <Button variant="outline" className="mt-6 bg-transparent">
-          Написать отзыв
+          {t('write_a_review')}
         </Button>
       </div>
     </div>

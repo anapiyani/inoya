@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/lib/language-context';
 import { Minus, Plus } from 'lucide-react';
 
 interface QuantitySelectorProps {
@@ -14,6 +15,7 @@ export function QuantitySelector({
   onQuantityChange,
   max = 10,
 }: QuantitySelectorProps) {
+  const { t } = useLanguage();
   const decrease = () => {
     if (quantity > 1) {
       onQuantityChange(quantity - 1);
@@ -28,7 +30,7 @@ export function QuantitySelector({
 
   return (
     <div className="space-y-3">
-      <h4 className="font-medium">Количество:</h4>
+      <h4 className="font-medium">{t('quantity')}:</h4>
       <div className="flex items-center gap-3">
         <Button
           variant="outline"

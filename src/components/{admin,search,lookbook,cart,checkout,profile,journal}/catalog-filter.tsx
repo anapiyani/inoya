@@ -68,7 +68,7 @@ export function FilterSidebar({
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between border-b p-4 lg:hidden">
-            <h3 className="text-lg font-semibold">Фильтры</h3>
+            <h3 className="text-lg font-semibold">{t('filter')}</h3>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-5 w-5" />
             </Button>
@@ -76,7 +76,7 @@ export function FilterSidebar({
 
           <div className="flex-1 space-y-6 overflow-y-auto p-4">
             <div>
-              <h4 className="mb-3 font-semibold">Категория</h4>
+              <h4 className="mb-3 font-semibold">{t('category')}</h4>
               <div className="space-y-2">
                 {categories.map((category) => (
                   <div
@@ -102,7 +102,7 @@ export function FilterSidebar({
             </div>
 
             <div>
-              <h4 className="mb-3 font-semibold">Цена</h4>
+              <h4 className="mb-3 font-semibold">{t('price')}</h4>
               <div className="space-y-4">
                 <Slider
                   value={filters.priceRange}
@@ -136,7 +136,7 @@ export function FilterSidebar({
                   <span>-</span>
                   <Input
                     type="number"
-                    placeholder="До"
+                    placeholder={t('to')}
                     value={filters.priceRange[1]}
                     onChange={(e) =>
                       onFiltersChange({
@@ -147,7 +147,7 @@ export function FilterSidebar({
                         ],
                       })
                     }
-                    className="w-20"
+                    className="w-24"
                   />
                   <span>тг</span>
                 </div>
@@ -156,7 +156,7 @@ export function FilterSidebar({
 
             {/* Size Filter */}
             <div>
-              <h4 className="mb-3 font-semibold">Размер</h4>
+              <h4 className="mb-3 font-semibold">{t('size')}</h4>
               <div className="grid grid-cols-3 gap-2">
                 {sizes.map((size) => (
                   <div key={size} className="flex items-center space-x-2">
@@ -187,7 +187,7 @@ export function FilterSidebar({
 
             {/* Color Filter */}
             <div>
-              <h4 className="mb-3 font-semibold">Цвет</h4>
+              <h4 className="mb-3 font-semibold">{t('color')}</h4>
               <div className="space-y-2">
                 {colors.map((color) => (
                   <div key={color} className="flex items-center space-x-2">
@@ -227,7 +227,7 @@ export function FilterSidebar({
                   }
                 />
                 <Label htmlFor="new-items" className="text-sm">
-                  Только новинки
+                  {t('newItems')}
                 </Label>
               </div>
             </div>
@@ -248,7 +248,7 @@ export function FilterSidebar({
                 })
               }
             >
-              Очистить фильтры
+              {t('clearFilters')}
             </Button>
           </div>
         </div>

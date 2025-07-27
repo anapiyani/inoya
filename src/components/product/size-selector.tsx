@@ -1,5 +1,7 @@
 'use client';
 
+import { useLanguage } from '@/lib/language-context';
+
 interface SizeSelectorProps {
   sizes: Array<{
     size: string;
@@ -16,12 +18,13 @@ export function SizeSelector({
   onSizeChange,
   category,
 }: SizeSelectorProps) {
+  const { t } = useLanguage();
   const isShoes = category === 'shoes';
 
   return (
     <div className="space-y-3">
       <h4 className="font-medium">
-        Размер: {selectedSize || 'Выберите размер'}
+        {t('size')}: {selectedSize || t('please_select_size')}
       </h4>
       <div className={`grid gap-2 ${isShoes ? 'grid-cols-6' : 'grid-cols-5'}`}>
         {sizes.map((sizeOption) => (
@@ -42,7 +45,7 @@ export function SizeSelector({
         ))}
       </div>
       {!selectedSize && (
-        <p className="text-sm text-gray-500">Пожалуйста, выберите размер</p>
+        <p className="text-sm text-gray-500">{t('please_select_size')}</p>
       )}
     </div>
   );

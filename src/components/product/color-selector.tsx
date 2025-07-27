@@ -1,5 +1,7 @@
 'use client';
 
+import { useLanguage } from '@/lib/language-context';
+
 interface ColorSelectorProps {
   colors: Array<{
     name: string;
@@ -14,9 +16,12 @@ export function ColorSelector({
   selectedColor,
   onColorChange,
 }: ColorSelectorProps) {
+  const { t } = useLanguage();
   return (
     <div className="space-y-3">
-      <h4 className="font-medium">Цвет: {selectedColor}</h4>
+      <h4 className="font-medium">
+        {t('color')}: {selectedColor}
+      </h4>
       <div className="flex gap-3">
         {colors.map((color) => (
           <button

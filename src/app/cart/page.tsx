@@ -6,10 +6,10 @@ import { Header } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useCart } from '@/lib/cart-count-context';
+import { useLanguage } from '@/lib/language-context';
 import { ArrowLeft, ShoppingBag, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
-// Mock recommended products
 const recommendedProducts = [
   {
     id: '7',
@@ -39,6 +39,7 @@ const recommendedProducts = [
 ];
 
 export default function CartPage() {
+  const { t } = useLanguage();
   const { cartItems, clearCart } = useCart();
 
   return (
@@ -47,7 +48,6 @@ export default function CartPage() {
 
       <div className="pt-20">
         <div className="container mx-auto px-4 py-8">
-          {/* Page Header */}
           <div className="mb-8">
             <div className="mb-4 flex items-center gap-4">
               <Link href="/catalog">
@@ -57,13 +57,13 @@ export default function CartPage() {
               </Link>
               <h1 className="flex items-center gap-3 text-3xl font-bold">
                 <ShoppingBag className="h-8 w-8" />
-                Корзина
+                {t('cart')}
               </h1>
             </div>
             <p className="text-gray-600">
               {cartItems.length === 0
-                ? 'Ваша корзина пуста'
-                : `${cartItems.length} ${cartItems.length === 1 ? 'товар' : 'товаров'} в корзине`}
+                ? t('empty_cart')
+                : `${cartItems.length} ${cartItems.length === 1 ? t('one_item') : t('multiple_items')} ${t('in_cart')}`}
             </p>
           </div>
 
@@ -73,18 +73,17 @@ export default function CartPage() {
               <div className="mb-6">
                 <ShoppingBag className="mx-auto mb-4 h-24 w-24 text-gray-300" />
                 <h2 className="mb-2 text-2xl font-semibold text-gray-700">
-                  Ваша корзина пуста
+                  {t('cart_empty')}
                 </h2>
                 <p className="mx-auto max-w-md text-gray-500">
-                  Добавьте товары в корзину, чтобы оформить заказ. У нас есть
-                  много красивых вещей для вас!
+                  {t('cart_empty_description')}
                 </p>
               </div>
               <div className="space-y-4">
                 <Link href="/catalog">
                   <Button className="bg-black px-8 py-3 text-white hover:bg-gray-800">
                     <ShoppingBag className="mr-2 h-5 w-5" />
-                    Перейти к покупкам
+                    {t('go_to_shopping')}
                   </Button>
                 </Link>
                 <div>
@@ -92,7 +91,7 @@ export default function CartPage() {
                     href="/"
                     className="text-gray-600 underline hover:text-gray-800"
                   >
-                    Вернуться на главную
+                    {t('go_to_home')}
                   </Link>
                 </div>
               </div>
@@ -105,7 +104,7 @@ export default function CartPage() {
                   <div className="p-6">
                     <div className="mb-6 flex items-center justify-between">
                       <h2 className="text-xl font-semibold">
-                        Товары в корзине
+                        {t('items_in_cart')}
                       </h2>
                       <Button
                         variant="outline"
@@ -114,7 +113,7 @@ export default function CartPage() {
                         className="border-red-600 bg-transparent text-red-600 hover:bg-red-50"
                       >
                         <Trash2 className="mr-2 h-4 w-4" />
-                        Очистить корзину
+                        {t('clear_cart')}
                       </Button>
                     </div>
 
@@ -131,7 +130,7 @@ export default function CartPage() {
                   <Link href="/catalog">
                     <Button variant="outline" className="bg-transparent">
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Продолжить покупки
+                      {t('continue_shopping')}
                     </Button>
                   </Link>
                 </div>
@@ -147,7 +146,9 @@ export default function CartPage() {
           {/* Recommended Products */}
           {cartItems.length > 0 && (
             <div className="mt-16">
-              <h3 className="mb-8 text-2xl font-bold">Рекомендуем также</h3>
+              <h3 className="mb-8 text-2xl font-bold">
+                {t('recommended_products')}
+              </h3>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {recommendedProducts.map((product) => (
                   <ProductCard

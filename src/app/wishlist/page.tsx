@@ -21,12 +21,12 @@ export default function WishlistPage() {
           <div className="mb-8">
             <h1 className="mb-4 flex items-center gap-3 text-3xl font-bold">
               <Heart className="h-8 w-8 text-red-500" />
-              Избранные товары
+              {t('wishlist')}
             </h1>
             <p className="text-gray-600">
               {wishlistItems.length === 0
-                ? 'У вас пока нет избранных товаров'
-                : `${wishlistItems.length} ${wishlistItems.length === 1 ? 'товар' : 'товаров'} в избранном`}
+                ? t('empty_wishlist')
+                : `${wishlistItems.length} ${wishlistItems.length === 1 ? t('one_item') : t('multiple_items')} ${t('in_wishlist')}`}
             </p>
           </div>
 
@@ -35,18 +35,17 @@ export default function WishlistPage() {
               <div className="mb-6">
                 <Heart className="mx-auto mb-4 h-24 w-24 text-gray-300" />
                 <h2 className="mb-2 text-2xl font-semibold text-gray-700">
-                  Ваш список избранного пуст
+                  {t('empty_wishlist')}
                 </h2>
                 <p className="mx-auto max-w-md text-gray-500">
-                  Добавляйте товары в избранное, нажимая на иконку сердечка,
-                  чтобы не потерять понравившиеся вещи
+                  {t('add_to_wishlist')}
                 </p>
               </div>
               <div className="gap-3 space-y-4">
                 <Link href="/catalog">
                   <Button className="bg-black px-8 py-3 text-white hover:bg-gray-800">
                     <ShoppingBag className="mr-2 h-5 w-5" />
-                    Перейти к покупкам
+                    {t('go_to_shopping')}
                   </Button>
                 </Link>
                 <div className="mt-4">
@@ -54,7 +53,7 @@ export default function WishlistPage() {
                     href="/"
                     className="mt-2 text-gray-600 underline hover:text-gray-800"
                   >
-                    Вернуться на главную
+                    {t('go_to_home')}
                   </Link>
                 </div>
               </div>
@@ -66,7 +65,7 @@ export default function WishlistPage() {
                 <div className="flex items-center gap-4">
                   <Button variant="outline" className="bg-transparent">
                     <ShoppingBag className="mr-2 h-4 w-4" />
-                    Добавить все в корзину
+                    {t('add_all_to_cart')}
                   </Button>
                 </div>
                 <Button
@@ -75,7 +74,7 @@ export default function WishlistPage() {
                   className="border-red-600 bg-transparent text-red-600 hover:bg-red-50"
                 >
                   <Trash2 className="mr-2 h-4 w-4" />
-                  Очистить список
+                  {t('clear_wishlist')}
                 </Button>
               </div>
 
@@ -107,7 +106,8 @@ export default function WishlistPage() {
                     variant="outline"
                     className="bg-transparent px-8 py-2"
                   >
-                    Продолжить покупки
+                    <ShoppingBag className="mr-2 h-5 w-5" />
+                    {t('continue_shopping')}
                   </Button>
                 </Link>
               </div>

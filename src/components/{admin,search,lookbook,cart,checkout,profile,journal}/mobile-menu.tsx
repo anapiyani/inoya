@@ -80,62 +80,92 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </div>
 
               {/* Other Menu Items */}
-              <a href="#" className="block text-lg hover:text-gray-600">
+              <a
+                href="/lookbook"
+                className="block text-lg hover:text-gray-600"
+                onClick={onClose}
+              >
                 {t('lookbook_sets')}
               </a>
-              <a href="#" className="block text-lg hover:text-gray-600">
+              <a
+                href="/catalog?category=accessories"
+                className="block text-lg hover:text-gray-600"
+                onClick={onClose}
+              >
                 {t('accessories')}
               </a>
-              <a href="#" className="block text-lg hover:text-gray-600">
+              <a
+                href="/catalog?category=shoes"
+                className="block text-lg hover:text-gray-600"
+                onClick={onClose}
+              >
                 {t('shoes')}
               </a>
-              <a href="#" className="block text-lg hover:text-gray-600">
+              <a
+                href="/sizing-guide"
+                className="block text-lg hover:text-gray-600"
+                onClick={onClose}
+              >
                 {t('sizing_guide')}
               </a>
               <a href="#" className="block text-lg hover:text-gray-600">
                 {t('tailoring_to_measure')}
               </a>
-              <a href="#" className="block text-lg hover:text-gray-600">
+              <a
+                href="/journal"
+                className="block text-lg hover:text-gray-600"
+                onClick={onClose}
+              >
                 {t('inoyas_journal')}
               </a>
-              <a href="#" className="block text-lg hover:text-gray-600">
+              <a
+                href="/girls"
+                className="block text-lg hover:text-gray-600"
+                onClick={onClose}
+              >
                 {t('inoyas_girls')}
               </a>
 
               <div className="mt-6 border-t border-gray-200 pt-4">
                 <a
-                  href="#"
+                  href="/delivery-payment"
                   className="block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
                 >
                   {t('delivery_and_payment')}
                 </a>
                 <a
-                  href="#"
+                  href="/refund-policy"
                   className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
                 >
                   {t('refund_policy')}
                 </a>
                 <a
-                  href="#"
+                  href="/support-center"
                   className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
                 >
                   {t('support_center')}
                 </a>
                 <a
-                  href="#"
+                  href="/cooperation"
                   className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
                 >
                   {t('cooperation')}
                 </a>
                 <a
-                  href="#"
+                  href="/faq"
                   className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
                 >
                   {t('faq')}
                 </a>
                 <a
-                  href="#"
+                  href="/about-us"
                   className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
                 >
                   {t('about_us')}
                 </a>

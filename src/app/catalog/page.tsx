@@ -14,7 +14,7 @@ import {
 import { FilterSidebar } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/catalog-filter';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useLanguage } from '@/lib/language-context';
-import { Filter, Grid, List, Search } from 'lucide-react';
+import { Filter, Search } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 
@@ -108,7 +108,9 @@ function CatalogContent() {
             <h1 className="mb-4 text-3xl font-bold">{getCategoryTitle()}</h1>
             <p className="text-gray-600">
               {filteredProducts.length}{' '}
-              {filteredProducts.length === 1 ? 'товар' : 'товаров'}
+              {filteredProducts.length === 1
+                ? t('one_item')
+                : t('multiple_items')}
             </p>
           </div>
 
@@ -125,7 +127,7 @@ function CatalogContent() {
                 <div className="relative">
                   <Search className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform text-gray-400" />
                   <Input
-                    placeholder="Поиск товаров..."
+                    placeholder={t('search')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-10"
@@ -141,53 +143,36 @@ function CatalogContent() {
                       className="lg:hidden"
                     >
                       <Filter className="mr-2 h-4 w-4" />
-                      Фильтры
+                      {t('filter')}
                     </Button>
                   </div>
 
                   <div className="flex items-center gap-4">
                     <Select value={sortBy} onValueChange={setSortBy}>
                       <SelectTrigger className="w-48">
-                        <SelectValue placeholder="Сортировка" />
+                        <SelectValue placeholder={t('sort')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="name">По названию</SelectItem>
+                        <SelectItem value="name">{t('sortByName')}</SelectItem>
                         <SelectItem value="price-low">
-                          Цена: по возрастанию
+                          {t('sortByPriceLow')}
                         </SelectItem>
                         <SelectItem value="price-high">
-                          Цена: по убыванию
+                          {t('sortByPriceHigh')}
                         </SelectItem>
                       </SelectContent>
                     </Select>
-
-                    <div className="flex rounded-md border">
-                      <Button
-                        variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                        size="sm"
-                        onClick={() => setViewMode('grid')}
-                        className="rounded-r-none"
-                      >
-                        <Grid className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant={viewMode === 'list' ? 'default' : 'ghost'}
-                        size="sm"
-                        onClick={() => setViewMode('list')}
-                        className="rounded-l-none"
-                      >
-                        <List className="h-4 w-4" />
-                      </Button>
-                    </div>
                   </div>
                 </div>
               </div>
 
               {filteredProducts.length === 0 ? (
                 <div className="py-12 text-center">
-                  <p className="text-lg text-gray-500">Товары не найдены</p>
+                  <p className="text-lg text-gray-500">
+                    {t('no_products_found')}
+                  </p>
                   <p className="mt-2 text-gray-400">
-                    Попробуйте изменить фильтры или поисковый запрос
+                    {t('no_products_found_description')}
                   </p>
                 </div>
               ) : (

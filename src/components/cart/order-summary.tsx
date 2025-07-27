@@ -2,9 +2,11 @@
 
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart-count-context';
+import { useLanguage } from '@/lib/language-context';
 import { useState } from 'react';
 
 export function OrderSummary() {
+  const { t } = useLanguage();
   const { getCartTotal, cartItems } = useCart();
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -32,31 +34,35 @@ export function OrderSummary() {
 
   return (
     <div className="rounded-lg bg-gray-50 p-6">
-      <h3 className="mb-4 text-lg font-semibold">Итого по заказу</h3>
+      <h3 className="mb-4 text-lg font-semibold">{t('order_summary')}</h3>
 
       <div className="space-y-3">
         <div className="flex justify-between">
-          <span>Товары ({cartItems.length})</span>
+          <span>
+            {t('items_in_cart')} ({cartItems.length})
+          </span>
           <span>{subtotal.toLocaleString()} тг</span>
         </div>
 
         {discount > 0 && (
           <div className="flex justify-between text-green-600">
-            <span>Скидка</span>
+            <span>{t('discount')}</span>
             <span>-{discount.toLocaleString()} тг</span>
           </div>
         )}
 
         <div className="flex justify-between">
-          <span>Доставка</span>
+          <span>{t('shipping')}</span>
           <span>
-            {shipping === 0 ? 'Бесплатно' : `${shipping.toLocaleString()} тг`}
+            {shipping === 0
+              ? t('free_shipping')
+              : `${shipping.toLocaleString()} тг`}
           </span>
         </div>
 
         <div className="border-t pt-3">
           <div className="flex justify-between text-lg font-semibold">
-            <span>Итого</span>
+            <span>{t('total')}</span>
             <span>{total.toLocaleString()} тг</span>
           </div>
         </div>
@@ -67,14 +73,15 @@ export function OrderSummary() {
         onClick={handleCheckout}
         className="mt-6 w-full bg-black py-3 text-white hover:bg-gray-800"
       >
-        Оформить заказ
+        {t('checkout')}
       </Button>
 
       {/* Free Shipping Notice */}
       {shipping > 0 && (
         <p className="mt-3 text-center text-sm text-gray-600">
-          Добавьте товаров на {(50000 - subtotal).toLocaleString()} тг для
-          бесплатной доставки
+          {t('free_shipping_notice', {
+            amount: (50000 - subtotal).toLocaleString(),
+          })}
         </p>
       )}
     </div>

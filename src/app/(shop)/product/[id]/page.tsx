@@ -3,23 +3,17 @@
 import { Header } from '@/components/layout/header';
 import { ColorSelector } from '@/components/product/color-selector';
 import { ImageGallery } from '@/components/product/image-gallery';
-import {
-  mockProduct,
-  mockShoeProduct,
-  similarProducts,
-  type Product,
-} from '@/components/product/product-data';
 import { QuantitySelector } from '@/components/product/quantity-selector';
-import { ReviewsSection } from '@/components/product/reviews-section';
 import { SizeSelector } from '@/components/product/size-selector';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
+import { useProduct } from '@/hooks/use-product';
 import { useCart } from '@/lib/cart-count-context';
 import { useLanguage } from '@/lib/language-context';
 import { useWishlist } from '@/lib/wishlist-context';
 import {
   Heart,
+  Loader2,
   RotateCcw,
   Shield,
   ShoppingCart,
@@ -27,27 +21,106 @@ import {
   Zap,
 } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+interface ApiColor {
+  name: string;
+  hexCode: string;
+}
+
+interface ApiSize {
+  name: string;
+  value: string;
+  inStock: boolean;
+}
+
+interface ApiProduct {
+  _id: string;
+  name: string;
+  description: string;
+  colors: ApiColor[];
+  sizes: ApiSize[];
+  price: number;
+  photo: string[];
+  badge: string;
+  category: string;
+  subcategory: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  data: {
+    product: ApiProduct;
+  };
+}
 
 export default function ProductPage() {
   const { t } = useLanguage();
   const params = useParams();
   const productId = params.id as string;
 
-  const product: Product = productId === '2' ? mockShoeProduct : mockProduct;
+  // Use your backend hook
+  const { data: apiResponse, isLoading, error } = useProduct(productId);
 
-  const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
+  const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
 
-  const handleColorChange = (colorName: string) => {
-    const variant = product.variants.find((v) => v.color === colorName);
-    if (variant) {
-      setSelectedVariant(variant);
-      setSelectedSize('');
+  // Transform API data to component format
+  const product = useMemo(() => {
+    if (!apiResponse) return null;
+
+    const apiProduct = apiResponse.product;
+    return {
+      id: apiProduct._id,
+      name: apiProduct.name,
+      description: apiProduct.description,
+      price: apiProduct.price,
+      images: apiProduct.photo,
+      colors: apiProduct.colors,
+      sizes: apiProduct.sizes,
+      badge: apiProduct.badge,
+      category: apiProduct.category,
+      subcategory: apiProduct.subcategory,
+      isNew: false, // You can add logic to determine if product is new
+      isActive: apiProduct.isActive,
+      // Mock data for features not in API
+      averageRating: 4.5,
+      totalReviews: 128,
+      reviews: [
+        {
+          id: '1',
+          user: 'Анна К.',
+          rating: 5,
+          comment: 'Отличное качество! Очень довольна покупкой.',
+          date: '2024-01-15',
+        },
+        {
+          id: '2',
+          user: 'Максим П.',
+          rating: 4,
+          comment: 'Хорошая вещь, но размер маловат.',
+          date: '2024-01-10',
+        },
+      ],
+    };
+  }, [apiResponse]);
+
+  useEffect(() => {
+    if (product?.colors && product.colors.length > 0 && !selectedColor) {
+      setSelectedColor(product.colors[0].name);
     }
+  }, [product, selectedColor]);
+
+  const handleColorChange = (colorName: string) => {
+    setSelectedColor(colorName);
+    setSelectedSize(''); // Reset size selection when color changes
   };
 
   const handleAddToCart = () => {
@@ -56,12 +129,14 @@ export default function ProductPage() {
       return;
     }
 
+    if (!product) return;
+
     addToCart({
       productId: product.id,
       name: product.name,
-      price: selectedVariant.price,
-      image: selectedVariant.images[0],
-      color: selectedVariant.color,
+      price: product.price,
+      image: product.images[0],
+      color: selectedColor,
       size: selectedSize,
       quantity,
       badge: product.badge,
@@ -75,17 +150,81 @@ export default function ProductPage() {
       alert('Пожалуйста, выберите размер');
       return;
     }
-    // Buy now logic
+
     console.log('Buy now:', {
-      product: product.name,
-      variant: selectedVariant.color,
+      product: product?.name,
+      color: selectedColor,
       size: selectedSize,
       quantity,
     });
     alert('Переход к оформлению заказа...');
   };
 
-  const availableSizes = selectedVariant.sizes.filter((s) => s.inStock);
+  const handleWishlistToggle = () => {
+    if (!product) return;
+
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist({
+        id: product.id,
+        name: product.name,
+        image: product.images[0],
+        price: product.price.toLocaleString(),
+        badge: product.badge,
+      });
+    }
+  };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="pt-20">
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex min-h-[400px] items-center justify-center">
+              <div className="flex items-center gap-2">
+                <Loader2 className="h-6 w-6 animate-spin" />
+                <span>Загрузка продукта...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="pt-20">
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex min-h-[400px] items-center justify-center">
+              <div className="text-center">
+                <h2 className="mb-2 text-2xl font-bold">Продукт не найден</h2>
+                <p className="text-gray-600">
+                  К сожалению, продукт с данным ID не существует или произошла
+                  ошибка.
+                </p>
+                <Button
+                  onClick={() => window.history.back()}
+                  className="mt-4"
+                  variant="outline"
+                >
+                  Вернуться назад
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const availableSizes = product.sizes?.filter((s) => s.inStock) ?? [];
   const isInStock = availableSizes.length > 0;
 
   return (
@@ -109,7 +248,7 @@ export default function ProductPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
               <ImageGallery
-                images={selectedVariant.images}
+                images={product.images}
                 productName={product.name}
               />
             </div>
@@ -130,7 +269,7 @@ export default function ProductPage() {
 
               {/* Price */}
               <div className="text-3xl font-bold">
-                {selectedVariant.price.toLocaleString()} тг
+                ${product.price}
                 {!isInStock && (
                   <span className="ml-2 text-lg text-red-600">
                     ({t('out_of_stock')})
@@ -140,17 +279,26 @@ export default function ProductPage() {
 
               {/* Color Selection */}
               <ColorSelector
-                colors={product.variants.map((v) => ({
-                  name: v.color,
-                  code: v.colorCode,
-                }))}
-                selectedColor={selectedVariant.color}
+                colors={
+                  product.colors?.map((color) => ({
+                    name: color.name,
+                    code: color.hexCode,
+                  })) ?? []
+                }
+                selectedColor={selectedColor}
                 onColorChange={handleColorChange}
               />
 
               {/* Size Selection */}
               <SizeSelector
-                sizes={selectedVariant.sizes}
+                sizes={
+                  product.sizes
+                    ? product.sizes.map((s) => ({
+                        size: s.value,
+                        inStock: s.inStock,
+                      }))
+                    : []
+                }
                 selectedSize={selectedSize}
                 onSizeChange={setSelectedSize}
                 category={product.category}
@@ -176,17 +324,7 @@ export default function ProductPage() {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() =>
-                      isInWishlist(product.id)
-                        ? removeFromWishlist(product.id)
-                        : addToWishlist({
-                            id: product.id,
-                            name: product.name,
-                            image: selectedVariant.images[0],
-                            price: selectedVariant.price.toLocaleString(),
-                            badge: product.badge,
-                          })
-                    }
+                    onClick={handleWishlistToggle}
                     className={
                       isInWishlist(product.id)
                         ? 'border-red-500 text-red-500'
@@ -194,7 +332,9 @@ export default function ProductPage() {
                     }
                   >
                     <Heart
-                      className={`h-5 w-5 ${isInWishlist(product.id) ? 'fill-current' : ''}`}
+                      className={`h-5 w-5 ${
+                        isInWishlist(product.id) ? 'fill-current' : ''
+                      }`}
                     />
                   </Button>
                 </div>
@@ -226,12 +366,16 @@ export default function ProductPage() {
               </div>
             </div>
           </div>
-          <ReviewsSection
+
+          {/* Reviews Section */}
+          {/* <ReviewsSection
             reviews={product.reviews}
             averageRating={product.averageRating}
             totalReviews={product.totalReviews}
-          />
-          <div className="mt-16">
+          /> */}
+
+          {/* Similar Products - You'll need to implement this API call separately */}
+          {/* <div className="mt-16">
             <h3 className="mb-8 text-2xl font-bold">{t('similar_products')}</h3>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {similarProducts.map((product) => (
@@ -244,7 +388,7 @@ export default function ProductPage() {
                 />
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

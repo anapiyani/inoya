@@ -58,7 +58,6 @@ export function ProductCard({
     </div>
   );
 
-  // If id is provided, wrap with Link for navigation
   if (id) {
     return (
       <Link href={`/product/${id}`} className="block">
@@ -67,6 +66,5 @@ export function ProductCard({
     );
   }
 
-  // If no id, return the card without navigation
   return cardContent;
 }

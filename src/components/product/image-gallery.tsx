@@ -24,8 +24,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
 
   return (
     <div className="space-y-4">
-      {/* Main Image */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-gray-100">
+      <div className="relative aspect-[5/6] overflow-hidden rounded-lg bg-gray-100">
         <Image
           src={images[currentImage] || '/placeholder.svg'}
           alt={`${productName} - изображение ${currentImage + 1}`}
@@ -34,7 +33,6 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
           priority
         />
 
-        {/* Navigation Arrows */}
         {images.length > 1 && (
           <>
             <Button

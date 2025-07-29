@@ -47,6 +47,9 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@stripe/stripe-js": "^7.5.0",
     "@tanstack/react-query": "^5.83.0",
+    "@tanstack/react-query-devtools": "^5.83.0",
+    "@tanstack/react-router": "^1.130.2",
+    "@tanstack/react-start": "^1.130.3",
     "@tanstack/react-table": "^8.21.3",
     "@types/nodemailer": "^6.4.17",
     "@uploadthing/react": "^7.3.2",
@@ -95,6 +98,7 @@
     "uploadthing": "^7.7.3",
     "use-debounce": "^10.0.5",
     "vaul": "^1.1.2",
+    "vite": "^6.3.5",
     "zod": "^4.0.5",
     "zustand": "^5.0.6"
   },

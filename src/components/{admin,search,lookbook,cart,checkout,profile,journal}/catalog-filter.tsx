@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Slider } from '@/components/ui/slider';
 import { useLanguage } from '@/lib/language-context';
 import { X } from 'lucide-react';
 
@@ -39,17 +38,6 @@ export function FilterSidebar({
     { value: 'sleeves', label: t('sleeves') },
     { value: 'outerwear', label: t('outerwear') },
     { value: 'wedding-dresses', label: t('wedding_dresses') },
-  ];
-
-  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-  const colors = [
-    'Черный',
-    'Белый',
-    'Красный',
-    'Синий',
-    'Розовый',
-    'Золотой',
-    'Серебряный',
   ];
 
   return (
@@ -104,24 +92,11 @@ export function FilterSidebar({
             <div>
               <h4 className="mb-3 font-semibold">{t('price')}</h4>
               <div className="space-y-4">
-                <Slider
-                  value={filters.priceRange}
-                  onValueChange={(value) =>
-                    onFiltersChange({
-                      ...filters,
-                      priceRange: value as [number, number],
-                    })
-                  }
-                  max={100000}
-                  min={0}
-                  step={1000}
-                  className="w-full"
-                />
                 <div className="flex items-center space-x-2">
                   <Input
                     type="number"
                     placeholder="От"
-                    value={filters.priceRange[0]}
+                    defaultValue={filters.priceRange[0]}
                     onChange={(e) =>
                       onFiltersChange({
                         ...filters,
@@ -137,7 +112,7 @@ export function FilterSidebar({
                   <Input
                     type="number"
                     placeholder={t('to')}
-                    value={filters.priceRange[1]}
+                    defaultValue={filters.priceRange[1]}
                     onChange={(e) =>
                       onFiltersChange({
                         ...filters,
@@ -153,70 +128,6 @@ export function FilterSidebar({
                 </div>
               </div>
             </div>
-
-            {/* Size Filter */}
-            <div>
-              <h4 className="mb-3 font-semibold">{t('size')}</h4>
-              <div className="grid grid-cols-3 gap-2">
-                {sizes.map((size) => (
-                  <div key={size} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={size}
-                      checked={filters.sizes.includes(size)}
-                      onCheckedChange={(checked) => {
-                        if (checked) {
-                          onFiltersChange({
-                            ...filters,
-                            sizes: [...filters.sizes, size],
-                          });
-                        } else {
-                          onFiltersChange({
-                            ...filters,
-                            sizes: filters.sizes.filter((s) => s !== size),
-                          });
-                        }
-                      }}
-                    />
-                    <Label htmlFor={size} className="text-sm">
-                      {size}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Color Filter */}
-            <div>
-              <h4 className="mb-3 font-semibold">{t('color')}</h4>
-              <div className="space-y-2">
-                {colors.map((color) => (
-                  <div key={color} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={color}
-                      checked={filters.colors.includes(color)}
-                      onCheckedChange={(checked) => {
-                        if (checked) {
-                          onFiltersChange({
-                            ...filters,
-                            colors: [...filters.colors, color],
-                          });
-                        } else {
-                          onFiltersChange({
-                            ...filters,
-                            colors: filters.colors.filter((c) => c !== color),
-                          });
-                        }
-                      }}
-                    />
-                    <Label htmlFor={color} className="text-sm">
-                      {color}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* New Items */}
             <div>
               <div className="flex items-center space-x-2">
                 <Checkbox
@@ -233,7 +144,6 @@ export function FilterSidebar({
             </div>
           </div>
 
-          {/* Clear Filters */}
           <div className="border-t p-4">
             <Button
               variant="outline"

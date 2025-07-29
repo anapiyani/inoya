@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { CartProvider } from '@/lib/cart-count-context';
 import { LanguageProvider } from '@/lib/language-context';
 import { WishlistProvider } from '@/lib/wishlist-context';
+import { ReactQueryProvider } from '@/provider/ReactQueryProvider';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type React from 'react';
@@ -20,20 +21,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <LanguageProvider>
-            <WishlistProvider>
-              <CartProvider>{children}</CartProvider>
-            </WishlistProvider>
-          </LanguageProvider>
-        </ThemeProvider>
+        <ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <LanguageProvider>
+              <WishlistProvider>
+                <CartProvider>{children}</CartProvider>
+              </WishlistProvider>
+            </LanguageProvider>
+          </ThemeProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

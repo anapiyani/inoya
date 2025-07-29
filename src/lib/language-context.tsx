@@ -347,6 +347,11 @@ const translations = {
     our_works: 'Our Works',
     gallery_photo: 'Gallery Photo',
     visit_studio: 'Visit our studio',
+    bestsellers: 'Bestsellers',
+    public_offer: 'Public Offer',
+    privacy_policy: 'Privacy Policy',
+    all_rights_reserved: 'All rights reserved.',
+    added_to_cart: 'Added to Cart',
   },
   ru: {
     'nav.home': 'Главная',
@@ -693,6 +698,11 @@ const translations = {
     our_works: 'Наши работы',
     gallery_photo: 'Фото из галереи',
     visit_studio: 'Посетите нашу студию',
+    bestsellers: 'Хиты продаж',
+    public_offer: 'Публичная оферта',
+    privacy_policy: 'Политика конфиденциальности',
+    all_rights_reserved: 'Все права защищены.',
+    added_to_cart: 'Добавлено в корзину',
   },
 };
 

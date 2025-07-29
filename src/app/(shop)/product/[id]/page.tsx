@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface ApiColor {
   name: string;
@@ -125,7 +126,22 @@ export default function ProductPage() {
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert('Пожалуйста, выберите размер');
+      toast.error(t('please_select_size'), {
+        duration: 3000,
+        style: {
+          background: '#fff',
+          color: '#000',
+          border: '1px solid #ccc',
+        },
+        iconTheme: {
+          primary: '#FF0000',
+          secondary: '#fff',
+        },
+        ariaProps: {
+          role: 'alert',
+          'aria-live': 'assertive',
+        },
+      });
       return;
     }
 
@@ -142,12 +158,42 @@ export default function ProductPage() {
       badge: product.badge,
     });
 
-    alert('Товар добавлен в корзину!');
+    toast.success(`${t('added_to_cart')} ${product.name}`, {
+      duration: 3000,
+      style: {
+        background: '#fff',
+        color: '#000',
+        border: '1px solid #ccc',
+      },
+      iconTheme: {
+        primary: '#4CAF50',
+        secondary: '#fff',
+      },
+      ariaProps: {
+        role: 'status',
+        'aria-live': 'polite',
+      },
+    });
   };
 
   const handleBuyNow = () => {
     if (!selectedSize) {
-      alert('Пожалуйста, выберите размер');
+      toast.error(t('please_select_size'), {
+        duration: 3000,
+        style: {
+          background: '#fff',
+          color: '#000',
+          border: '1px solid #ccc',
+        },
+        iconTheme: {
+          primary: '#FF0000',
+          secondary: '#fff',
+        },
+        ariaProps: {
+          role: 'alert',
+          'aria-live': 'assertive',
+        },
+      });
       return;
     }
 

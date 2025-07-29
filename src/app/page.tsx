@@ -16,6 +16,7 @@ import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,p
 import { useLanguage } from '@/lib/language-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import heroTwo from '../../public/images/hero-2.jpg';
 import heroOne from '../../public/images/hero-bg.jpg';
@@ -228,7 +229,8 @@ export default function HomePage() {
                   INOYA
                 </h3>
                 <p className="mb-2 text-sm text-gray-400">
-                  Свое право защищены 2025 INOYA
+                  © 2025 INOYA.{' '}
+                  {t('all_rights_reserved') || 'All rights reserved.'}
                 </p>
                 <p className="mb-2 text-sm text-gray-400">
                   {t('adress_of_the_company')}
@@ -238,14 +240,20 @@ export default function HomePage() {
               <div>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
-                      Доставка и оплата
-                    </a>
+                    <Link
+                      href="/delivery-payment"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      {t('delivery_and_payment')}
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
-                      Возврат и обмен
-                    </a>
+                    <Link
+                      href="/refund-policy"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      {t('refund_policy')}
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -253,14 +261,20 @@ export default function HomePage() {
               <div>
                 <ul className="space-y-2 text-sm">
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
-                      Определение размера
-                    </a>
+                    <Link
+                      href="/sizing-guide"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      {t('sizing_guide')}
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
-                      Центр поддержки
-                    </a>
+                    <Link
+                      href="/support-center"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      {t('support_center')}
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -268,14 +282,20 @@ export default function HomePage() {
               <div>
                 <ul className="mb-4 space-y-2 text-sm">
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
-                      Контакты
-                    </a>
+                    <Link
+                      href="/about-us"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      {t('about_us')}
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-white">
+                    <Link
+                      href="/faq"
+                      className="text-gray-300 hover:text-white"
+                    >
                       FAQ
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -294,8 +314,8 @@ export default function HomePage() {
                 </div>
 
                 <div className="text-right text-sm text-gray-400">
-                  <p>Публичная оферта</p>
-                  <p>Политика конфиденциальности</p>
+                  <p>{t('public_offer') || 'Public Offer'}</p>
+                  <p>{t('privacy_policy') || 'Privacy Policy'}</p>
                 </div>
               </div>
             </div>

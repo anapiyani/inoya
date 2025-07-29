@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 
-interface WishlistItem {
+export interface WishlistItem {
   id: string;
   name: string;
   price: string;

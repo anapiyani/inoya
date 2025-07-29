@@ -2,7 +2,7 @@
 
 import { Header } from '@/components/layout/header';
 import { useLanguage } from '@/lib/language-context';
-import { Clock, CreditCard, Globe, Package, Shield, Truck } from 'lucide-react';
+import { Clock, CreditCard, Globe, Package, Truck } from 'lucide-react';
 
 export default function DeliveryPaymentPage() {
   const { t } = useLanguage();
@@ -10,43 +10,32 @@ export default function DeliveryPaymentPage() {
   const deliveryMethods = [
     {
       icon: <Truck className="h-8 w-8" />,
-      title: 'Стандартная доставка',
-      time: '5-7 рабочих дней',
-      price: '2000 тг',
-      description: 'Доставка курьерской службой по Казахстану',
+      title: t('delivery_standard'),
+      time: t('delivery_standard_time'),
+      price: t('delivery_standard_price'),
+      description: t('delivery_standard_desc'),
     },
     {
       icon: <Package className="h-8 w-8" />,
-      title: 'Экспресс доставка',
-      time: '2-3 рабочих дня',
-      price: '4000 тг',
-      description: 'Быстрая доставка в крупные города',
+      title: t('delivery_express'),
+      time: t('delivery_express_time'),
+      price: t('delivery_express_price'),
+      description: t('delivery_express_desc'),
     },
     {
       icon: <Globe className="h-8 w-8" />,
-      title: 'Международная доставка',
-      time: '10-14 рабочих дней',
-      price: 'Рассчитывается индивидуально',
-      description: 'Доставка в страны СНГ и дальнее зарубежье',
+      title: t('delivery_international'),
+      time: t('delivery_international_time'),
+      price: t('delivery_international_price'),
+      description: t('delivery_international_desc'),
     },
   ];
 
   const paymentMethods = [
     {
       icon: <CreditCard className="h-8 w-8" />,
-      title: 'Банковские карты',
-      description: 'Visa, MasterCard, American Express, UnionPay, Discover',
-    },
-    {
-      icon: <Shield className="h-8 w-8" />,
-      title: 'Электронные кошельки',
-      description: 'PayPal, Google Pay, Apple Pay',
-    },
-    {
-      icon: <Package className="h-8 w-8" />,
-      title: 'Банковский перевод',
-      description:
-        'Для клиентов из России: Сбербанк, Альфа-Банк, ВТБ, Тинькофф',
+      title: t('payment_cards'),
+      description: t('payment_cards_desc'),
     },
   ];
 
@@ -62,14 +51,15 @@ export default function DeliveryPaymentPage() {
               {t('delivery_and_payment')}
             </h1>
             <p className="mx-auto max-w-3xl text-lg text-gray-600">
-              Мы предлагаем удобные способы доставки и оплаты для вашего
-              комфорта
+              {t('delivery_intro')}
             </p>
           </div>
 
           {/* Delivery Section */}
           <div className="mb-16">
-            <h2 className="mb-8 text-center text-3xl font-bold">Доставка</h2>
+            <h2 className="mb-8 text-center text-3xl font-bold">
+              {t('delivery')}
+            </h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {deliveryMethods.map((method, index) => (
                 <div
@@ -97,18 +87,16 @@ export default function DeliveryPaymentPage() {
             {/* Free Shipping Notice */}
             <div className="mt-8 rounded-lg border border-green-200 bg-green-50 p-6 text-center">
               <h3 className="mb-2 text-xl font-semibold text-green-800">
-                Бесплатная доставка
+                {t('delivery_free_title')}
               </h3>
-              <p className="text-green-700">
-                При заказе от 50 000 тг доставка по Казахстану бесплатная!
-              </p>
+              <p className="text-green-700">{t('delivery_free_desc')}</p>
             </div>
           </div>
 
           {/* Payment Section */}
           <div className="mb-16">
             <h2 className="mb-8 text-center text-3xl font-bold">
-              Способы оплаты
+              {t('payment_methods')}
             </h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {paymentMethods.map((method, index) => (
@@ -130,56 +118,50 @@ export default function DeliveryPaymentPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Delivery Info */}
             <div className="rounded-lg bg-gray-50 p-8">
-              <h3 className="mb-6 text-2xl font-bold">Информация о доставке</h3>
+              <h3 className="mb-6 text-2xl font-bold">
+                {t('delivery_info_title')}
+              </h3>
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>
-                    Все заказы обрабатываются в течение 3-4 рабочих дней
-                  </span>
+                  <span>{t('delivery_info_1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>Вы получите трек-номер для отслеживания заказа</span>
+                  <span>{t('delivery_info_2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>Доставка осуществляется с понедельника по пятницу</span>
+                  <span>{t('delivery_info_3')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>
-                    При отсутствии дома курьер свяжется с вами для согласования
-                    времени
-                  </span>
+                  <span>{t('delivery_info_4')}</span>
                 </li>
               </ul>
             </div>
 
             {/* Payment Info */}
             <div className="rounded-lg bg-gray-50 p-8">
-              <h3 className="mb-6 text-2xl font-bold">Информация об оплате</h3>
+              <h3 className="mb-6 text-2xl font-bold">
+                {t('payment_info_title')}
+              </h3>
               <ul className="space-y-4 text-gray-700">
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>Все платежи защищены SSL-шифрованием</span>
+                  <span>{t('payment_info_1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>Оплата производится в момент оформления заказа</span>
+                  <span>{t('payment_info_2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>
-                    В некоторых случаях может потребоваться предоплата доставки
-                  </span>
+                  <span>{t('payment_info_3')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black"></div>
-                  <span>
-                    Для банковского перевода свяжитесь с нами для получения
-                    реквизитов
-                  </span>
+                  <span>{t('payment_info_4')}</span>
                 </li>
               </ul>
             </div>
@@ -187,10 +169,10 @@ export default function DeliveryPaymentPage() {
 
           {/* Contact for Questions */}
           <div className="mt-16 rounded-lg bg-black p-8 text-center text-white">
-            <h3 className="mb-4 text-2xl font-semibold">Остались вопросы?</h3>
-            <p className="mb-6">
-              Свяжитесь с нами для получения дополнительной информации
-            </p>
+            <h3 className="mb-4 text-2xl font-semibold">
+              {t('questions_title')}
+            </h3>
+            <p className="mb-6">{t('questions_text')}</p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <button className="rounded bg-white px-6 py-3 text-black transition-colors hover:bg-gray-100">
                 WhatsApp

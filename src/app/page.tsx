@@ -37,6 +37,17 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
+  const labelToImage: Record<string, string> = {
+    corsets: 'corsets.png',
+    dress: 'dress.png',
+    outerwear: 'outerwear.png',
+    skirts: 'skirts.png',
+    sleeves: 'sleeves.png',
+    tops_blouses: 'tops.png',
+    wedding_dresses: 'wedding.png',
+    new: 'placeholder.svg',
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -94,20 +105,28 @@ export default function HomePage() {
                       (item) =>
                         item.label !== 'newArrivals' && item.label !== 'all'
                     )
-                    .map((item, index) => (
-                      <CarouselItem
-                        className="basis-1/2 md:basis-1/3 lg:basis-1/5"
-                        key={index}
-                      >
-                        <CategoryCard
+                    .map((item, index) => {
+                      const imageFile =
+                        labelToImage[item.label] ||
+                        'placeholder.svg?height=400&width=400';
+
+                      return (
+                        <CarouselItem
+                          className="basis-1/2 gap-2 md:basis-1/3 lg:basis-1/5"
                           key={index}
-                          image={'/placeholder.svg?height=400&width=400'}
-                          title={item.label}
-                          className="md:col-span-1"
-                        />
-                      </CarouselItem>
-                    ))}
+                        >
+                          <CategoryCard
+                            key={index}
+                            image={imageFile}
+                            title={t(item.label)}
+                            real_name={item.label}
+                            className="md:col-span-1"
+                          />
+                        </CarouselItem>
+                      );
+                    })}
                 </CarouselContent>
+
                 <div className="hidden sm:block">
                   <CarouselPrevious />
                   <CarouselNext />

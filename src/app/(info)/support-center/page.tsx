@@ -11,33 +11,33 @@ export default function SupportCenterPage() {
   const contactMethods = [
     {
       icon: <Mail className="h-6 w-6" />,
-      title: 'Email',
+      title: t('email'),
       value: 'inoyahelp@gmail.com',
-      description: 'Ответим в течение 24 часов',
+      description: t('reply_24h'),
     },
     {
       icon: <Phone className="h-6 w-6" />,
-      title: 'Телефон',
+      title: t('phone'),
       value: '+7 (771) 141 08 48',
-      description: 'Звоните в рабочее время',
+      description: t('working_hours_contact'),
     },
     {
       icon: <MessageCircle className="h-6 w-6" />,
       title: 'WhatsApp',
-      value: 'Написать в WhatsApp',
-      description: 'Быстрые ответы в мессенджере',
+      value: t('write_whatsapp'),
+      description: t('fast_messenger'),
     },
     {
       icon: <MessageCircle className="h-6 w-6" />,
       title: 'Telegram',
-      value: 'Написать в Telegram',
-      description: 'Удобное общение в мессенджере',
+      value: t('write_telegram'),
+      description: t('convenient_messenger'),
     },
     {
       icon: <Instagram className="h-6 w-6" />,
       title: 'Instagram',
       value: '@inoya_official',
-      description: 'Следите за новостями и задавайте вопросы',
+      description: t('follow_and_ask'),
     },
   ];
 
@@ -82,7 +82,7 @@ export default function SupportCenterPage() {
             <MessageCircle className="mx-auto mb-4 h-12 w-12" />
             <h3 className="mb-4 text-2xl font-semibold">{t('online_chat')}</h3>
             <button className="rounded bg-white px-8 py-3 text-black transition-colors hover:bg-gray-100">
-              Начать чат
+              {t('start_chat')}
             </button>
           </div>
 
@@ -102,12 +102,10 @@ export default function SupportCenterPage() {
             <h3 className="mb-4 text-2xl font-semibold">
               {t('frequently_asked')}
             </h3>
-            <p className="mb-6 text-gray-600">
-              Возможно, ответ на ваш вопрос уже есть в нашем разделе FAQ
-            </p>
+            <p className="mb-6 text-gray-600">{t('faq_redirect_text')}</p>
             <Link href="/faq">
               <button className="rounded bg-black px-8 py-3 text-white transition-colors hover:bg-gray-800">
-                Перейти к FAQ
+                {t('go_to_faq')}
               </button>
             </Link>
           </div>

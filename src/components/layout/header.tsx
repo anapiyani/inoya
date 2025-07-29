@@ -13,6 +13,7 @@ export function Header() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [openInput, setOpenInput] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { wishlistItems } = useWishlist();
   const { getCartCount } = useCart();
@@ -62,9 +63,35 @@ export function Header() {
           </h1>
 
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5" />
-            </Button>
+            {openInput ? (
+              <div className="relative flex items-center">
+                <input
+                  type="text"
+                  placeholder="Поиск..."
+                  className="h-9 w-48 rounded-full border border-gray-300 px-4 pr-10 text-sm shadow-sm transition-all focus:border-black focus:outline-none"
+                  onBlur={() => setOpenInput(false)}
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const query = (e.target as HTMLInputElement).value;
+                      router.push(
+                        `/catalog?search=${encodeURIComponent(query)}`
+                      );
+                    }
+                  }}
+                />
+                <Search className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+              </div>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full hover:bg-gray-100"
+                onClick={() => setOpenInput(true)}
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            )}
             <Link href="/wishlist">
               <Button variant="ghost" size="icon" className="relative">
                 <Heart className="h-5 w-5" />

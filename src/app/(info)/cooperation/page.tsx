@@ -1,7 +1,5 @@
 'use client';
 
-import type React from 'react';
-
 import { Header } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,6 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useLanguage } from '@/lib/language-context';
 import { Mail, Phone } from 'lucide-react';
+import type React from 'react';
 import { useState } from 'react';
 
 export default function CooperationPage() {
@@ -32,7 +31,7 @@ export default function CooperationPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    alert('Спасибо за ваш интерес! Мы свяжемся с вами в ближайшее время.');
+    alert(t('cooperation_form_success'));
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -153,13 +152,19 @@ export default function CooperationPage() {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Выберите тип сотрудничества" />
+                      <SelectValue
+                        placeholder={t('select_collaboration_type')}
+                      />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="wholesale">Опт</SelectItem>
-                      <SelectItem value="franchise">Франшиза</SelectItem>
+                      <SelectItem value="wholesale">
+                        {t('wholesale')}
+                      </SelectItem>
+                      <SelectItem value="franchise">
+                        {t('franchise')}
+                      </SelectItem>
                       <SelectItem value="collaboration">
-                        Коллаборация
+                        {t('collaboration')}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -188,7 +193,7 @@ export default function CooperationPage() {
                       handleInputChange('message', e.target.value)
                     }
                     rows={4}
-                    placeholder="Расскажите подробнее о ваших планах..."
+                    placeholder={t('message_placeholder')}
                   />
                 </div>
 
@@ -219,7 +224,7 @@ export default function CooperationPage() {
 
               {/* Photo Gallery Animation */}
               <div className="mt-12">
-                <h4 className="mb-6 text-xl font-semibold">Наши работы</h4>
+                <h4 className="mb-6 text-xl font-semibold">{t('our_works')}</h4>
                 <div className="grid grid-cols-2 gap-4">
                   {Array.from({ length: 8 }, (_, i) => (
                     <div
@@ -228,7 +233,7 @@ export default function CooperationPage() {
                     >
                       <img
                         src={`/placeholder.svg?height=300&width=300&text=Photo+${i + 1}`}
-                        alt={`Gallery ${i + 1}`}
+                        alt={`${t('gallery_photo')} ${i + 1}`}
                         className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>

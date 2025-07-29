@@ -86,7 +86,7 @@ export default function CartPage() {
                     {t('go_to_shopping')}
                   </Button>
                 </Link>
-                <div>
+                <div className="mt-4">
                   <Link
                     href="/"
                     className="text-gray-600 underline hover:text-gray-800"

@@ -49,14 +49,14 @@ export default function FAQPage() {
       question: t('faq_q10'),
       answer: (
         <>
-          {t('faq_a10').replace('"Partnership"', '"')}
+          {t('faq_a10_prefix')}{' '}
           <Link
             href="/cooperation"
             className="inline-block rounded bg-red-600 px-3 py-1 text-sm text-white transition-colors hover:bg-red-700"
           >
-            Сотрудничество
+            {t('partnership')}
           </Link>
-          {"'"}.
+          .
         </>
       ),
     },
@@ -102,7 +102,7 @@ export default function FAQPage() {
           >
             {t('faq_a15')}
           </Link>
-          {'. Если размер не подошел, вы всегда можете обменять товар.'}
+          {`. ${t('faq_size_exchange')}`}
         </>
       ),
     },
@@ -111,7 +111,6 @@ export default function FAQPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-
       <div className="pt-20">
         <div className="container mx-auto px-4 py-8">
           {/* Page Header */}
@@ -128,9 +127,7 @@ export default function FAQPage() {
                     {item.question}
                   </h3>
                   <div className="leading-relaxed text-gray-600">
-                    {typeof item.answer === 'string'
-                      ? item.answer
-                      : item.answer}
+                    {item.answer}
                   </div>
                 </div>
               ))}
@@ -140,14 +137,12 @@ export default function FAQPage() {
           {/* Contact Support */}
           <div className="mt-16 rounded-lg bg-gray-50 p-8 text-center">
             <h3 className="mb-4 text-2xl font-semibold">
-              Не нашли ответ на свой вопрос?
+              {t('faq_no_answer')}
             </h3>
-            <p className="mb-6 text-gray-600">
-              Обратитесь в нашу службу поддержки, и мы поможем вам.
-            </p>
+            <p className="mb-6 text-gray-600">{t('faq_contact_support')}</p>
             <Link href="/support-center">
               <button className="rounded bg-black px-8 py-3 text-white transition-colors hover:bg-gray-800">
-                Связаться с поддержкой
+                {t('contact_support')}
               </button>
             </Link>
           </div>

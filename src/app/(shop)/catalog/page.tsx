@@ -39,6 +39,7 @@ function CatalogContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category') || 'all';
+  const searchParam = searchParams.get('search') || '';
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -60,6 +61,10 @@ function CatalogContent() {
     setFilters((prev) => ({ ...prev, category: categoryParam }));
     setCurrentPage(1);
   }, [categoryParam]);
+
+  useEffect(() => {
+    setSearchQuery(searchParam);
+  }, [searchParam]);
 
   useEffect(() => {
     setCurrentPage(1);

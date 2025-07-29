@@ -10,28 +10,28 @@ export default function RefundPolicyPage() {
   const refundSteps = [
     {
       step: '1',
-      title: 'Свяжитесь с нами',
-      description: 'Напишите нам в течение 14 дней с момента получения товара',
+      title: t('refund_step_1_title'),
+      description: t('refund_step_1_desc'),
     },
     {
       step: '2',
-      title: 'Опишите причину возврата',
-      description: 'Укажите причину возврата и приложите фото товара',
+      title: t('refund_step_2_title'),
+      description: t('refund_step_2_desc'),
     },
     {
       step: '3',
-      title: 'Получите инструкции',
-      description: 'Мы вышлем вам инструкции по возврату товара',
+      title: t('refund_step_3_title'),
+      description: t('refund_step_3_desc'),
     },
     {
       step: '4',
-      title: 'Отправьте товар',
-      description: 'Упакуйте товар и отправьте по указанному адресу',
+      title: t('refund_step_4_title'),
+      description: t('refund_step_4_desc'),
     },
     {
       step: '5',
-      title: 'Получите возврат',
-      description: 'После проверки товара мы вернем деньги в течение 7-10 дней',
+      title: t('refund_step_5_title'),
+      description: t('refund_step_5_desc'),
     },
   ];
 
@@ -45,8 +45,7 @@ export default function RefundPolicyPage() {
           <div className="mb-12 text-center">
             <h1 className="mb-4 text-4xl font-bold">{t('refund_policy')}</h1>
             <p className="mx-auto max-w-3xl text-lg text-gray-600">
-              Мы заботимся о ваших покупках и предлагаем справедливую политику
-              возврата
+              {t('refund_intro')}
             </p>
           </div>
 
@@ -56,31 +55,33 @@ export default function RefundPolicyPage() {
               <div className="mb-4 flex justify-center">
                 <Clock className="h-12 w-12 text-gray-600" />
               </div>
-              <h3 className="mb-2 text-xl font-semibold">14 дней</h3>
-              <p className="text-gray-600">
-                на возврат товара с момента получения
-              </p>
+              <h3 className="mb-2 text-xl font-semibold">
+                {t('refund_14_days')}
+              </h3>
+              <p className="text-gray-600">{t('refund_14_days_desc')}</p>
             </div>
             <div className="text-center">
               <div className="mb-4 flex justify-center">
                 <RotateCcw className="h-12 w-12 text-gray-600" />
               </div>
-              <h3 className="mb-2 text-xl font-semibold">Полный возврат</h3>
-              <p className="text-gray-600">средств при соблюдении условий</p>
+              <h3 className="mb-2 text-xl font-semibold">{t('refund_full')}</h3>
+              <p className="text-gray-600">{t('refund_full_desc')}</p>
             </div>
             <div className="text-center">
               <div className="mb-4 flex justify-center">
                 <Shield className="h-12 w-12 text-gray-600" />
               </div>
-              <h3 className="mb-2 text-xl font-semibold">Гарантия качества</h3>
-              <p className="text-gray-600">90 дней гарантии на все изделия</p>
+              <h3 className="mb-2 text-xl font-semibold">
+                {t('refund_quality')}
+              </h3>
+              <p className="text-gray-600">{t('refund_quality_desc')}</p>
             </div>
           </div>
 
           {/* Return Process */}
           <div className="mb-16">
             <h2 className="mb-8 text-center text-3xl font-bold">
-              Процесс возврата
+              {t('refund_process')}
             </h2>
             <div className="space-y-6">
               {refundSteps.map((step, index) => (
@@ -102,28 +103,28 @@ export default function RefundPolicyPage() {
             {/* What can be returned */}
             <div className="rounded-lg border border-green-200 bg-green-50 p-8">
               <h3 className="mb-6 text-2xl font-bold text-green-800">
-                Что можно вернуть
+                {t('refund_what_can')}
               </h3>
               <ul className="space-y-3 text-green-700">
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-600"></div>
-                  <span>Товар в оригинальной упаковке</span>
+                  <span>{t('refund_can_1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-600"></div>
-                  <span>Изделия без следов носки</span>
+                  <span>{t('refund_can_2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-600"></div>
-                  <span>Товар с сохраненными бирками</span>
+                  <span>{t('refund_can_3')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-600"></div>
-                  <span>Возврат в течение 14 дней</span>
+                  <span>{t('refund_can_4')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-600"></div>
-                  <span>Товар не подошел по размеру</span>
+                  <span>{t('refund_can_5')}</span>
                 </li>
               </ul>
             </div>
@@ -131,28 +132,28 @@ export default function RefundPolicyPage() {
             {/* What cannot be returned */}
             <div className="rounded-lg border border-red-200 bg-red-50 p-8">
               <h3 className="mb-6 text-2xl font-bold text-red-800">
-                Что нельзя вернуть
+                {t('refund_what_cannot')}
               </h3>
               <ul className="space-y-3 text-red-700">
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-red-600"></div>
-                  <span>Товары индивидуального пошива</span>
+                  <span>{t('refund_cannot_1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-red-600"></div>
-                  <span>Изделия со следами носки</span>
+                  <span>{t('refund_cannot_2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-red-600"></div>
-                  <span>Товар без оригинальной упаковки</span>
+                  <span>{t('refund_cannot_3')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-red-600"></div>
-                  <span>Лимитированные коллекции (указано в описании)</span>
+                  <span>{t('refund_cannot_4')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-red-600"></div>
-                  <span>Возврат после 14 дней</span>
+                  <span>{t('refund_cannot_5')}</span>
                 </li>
               </ul>
             </div>
@@ -164,24 +165,13 @@ export default function RefundPolicyPage() {
               <AlertCircle className="mt-1 h-6 w-6 flex-shrink-0 text-yellow-600" />
               <div>
                 <h3 className="mb-4 text-xl font-semibold text-yellow-800">
-                  Важная информация
+                  {t('refund_notice')}
                 </h3>
                 <ul className="space-y-2 text-yellow-700">
-                  <li>
-                    • Стоимость обратной доставки оплачивается покупателем
-                  </li>
-                  <li>
-                    • Возврат средств осуществляется тем же способом, которым
-                    была произведена оплата
-                  </li>
-                  <li>
-                    • Срок возврата средств: 7-10 рабочих дней после получения
-                    товара
-                  </li>
-                  <li>
-                    • При возврате товара ненадлежащего качества стоимость
-                    доставки компенсируется
-                  </li>
+                  <li>• {t('refund_notice_1')}</li>
+                  <li>• {t('refund_notice_2')}</li>
+                  <li>• {t('refund_notice_3')}</li>
+                  <li>• {t('refund_notice_4')}</li>
                 </ul>
               </div>
             </div>
@@ -190,11 +180,9 @@ export default function RefundPolicyPage() {
           {/* Contact Information */}
           <div className="rounded-lg bg-black p-8 text-center text-white">
             <h3 className="mb-4 text-2xl font-semibold">
-              Нужна помощь с возвратом?
+              {t('refund_help_title')}
             </h3>
-            <p className="mb-6">
-              Свяжитесь с нашей службой поддержки для получения помощи
-            </p>
+            <p className="mb-6">{t('refund_help_desc')}</p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <button className="rounded bg-white px-6 py-3 text-black transition-colors hover:bg-gray-100">
                 WhatsApp

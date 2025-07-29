@@ -6,7 +6,6 @@ import { useLanguage } from '@/lib/language-context';
 export default function SizingGuidePage() {
   const { t } = useLanguage();
 
-  // Mock size chart data
   const cinchingCorsetSizes = [
     { size: 'XS', bust: '80-84', waist: '60-64', hips: '86-90' },
     { size: 'S', bust: '84-88', waist: '64-68', hips: '90-94' },
@@ -49,7 +48,7 @@ export default function SizingGuidePage() {
             {/* Cinching Corsets */}
             <div>
               <h3 className="mb-4 text-center text-2xl font-bold">
-                Утягивающие корсеты (7-10 см утяжки)
+                {t('cinching_corsets_title')}
               </h3>
               <p className="mb-6 text-center text-gray-600">
                 {t('cinching_corsets')}
@@ -60,16 +59,16 @@ export default function SizingGuidePage() {
                   <thead>
                     <tr className="bg-gray-50">
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Размер
+                        {t('size')}
                       </th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Грудь (см)
+                        {t('bust_cm')}
                       </th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Талия (см)
+                        {t('waist_cm')}
                       </th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Бедра (см)
+                        {t('hips_cm')}
                       </th>
                     </tr>
                   </thead>
@@ -98,7 +97,7 @@ export default function SizingGuidePage() {
             {/* Light Corsets */}
             <div>
               <h3 className="mb-4 text-center text-2xl font-bold">
-                Корсеты с легкой утяжкой (3-5 см)
+                {t('light_corsets_title')}
               </h3>
               <p className="mb-6 text-center text-gray-600">
                 {t('light_corsets')}
@@ -109,16 +108,16 @@ export default function SizingGuidePage() {
                   <thead>
                     <tr className="bg-gray-50">
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Размер
+                        {t('size')}
                       </th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Грудь (см)
+                        {t('bust_cm')}
                       </th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Талия (см)
+                        {t('waist_cm')}
                       </th>
                       <th className="border border-gray-300 px-4 py-3 text-left font-semibold">
-                        Бедра (см)
+                        {t('hips_cm')}
                       </th>
                     </tr>
                   </thead>
@@ -145,52 +144,12 @@ export default function SizingGuidePage() {
             </div>
           </div>
 
-          {/* Measurement Guide */}
-          <div className="mt-16 rounded-lg bg-gray-50 p-8">
-            <h3 className="mb-6 text-center text-2xl font-bold">
-              Как правильно снять мерки
-            </h3>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div>
-                <h4 className="mb-4 text-xl font-semibold">
-                  Инструкция по измерению:
-                </h4>
-                <ul className="space-y-3 text-gray-700">
-                  <li>
-                    <strong>Грудь:</strong> Измеряйте по самой выступающей части
-                    груди
-                  </li>
-                  <li>
-                    <strong>Талия:</strong> Измеряйте в самом узком месте талии
-                  </li>
-                  <li>
-                    <strong>Бедра:</strong> Измеряйте по самой широкой части
-                    бедер
-                  </li>
-                  <li>
-                    <strong>Важно:</strong> Измеряйте в нижнем белье, не
-                    затягивая сантиметр
-                  </li>
-                </ul>
-              </div>
-              <div className="aspect-square overflow-hidden rounded-lg bg-gray-200">
-                <img
-                  src="/placeholder.svg?height=400&width=400&text=Measurement+Guide"
-                  alt="Measurement Guide"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Contact for Help */}
           <div className="mt-16 rounded-lg bg-black p-8 text-center text-white">
             <h3 className="mb-4 text-2xl font-semibold">
-              Нужна помощь с размером?
+              {t('sizing_help_title')}
             </h3>
-            <p className="mb-6">
-              Наши специалисты помогут вам выбрать идеальный размер
-            </p>
+            <p className="mb-6">{t('sizing_help_text')}</p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <button className="rounded bg-white px-6 py-3 text-black transition-colors hover:bg-gray-100">
                 WhatsApp

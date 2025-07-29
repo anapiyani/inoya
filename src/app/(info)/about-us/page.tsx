@@ -8,31 +8,11 @@ export default function AboutUsPage() {
   const { t } = useLanguage();
 
   const values = [
-    {
-      letter: 'I',
-      title: t('value_i'),
-      description: t('value_i_text'),
-    },
-    {
-      letter: 'N',
-      title: t('value_n'),
-      description: t('value_n_text'),
-    },
-    {
-      letter: 'O',
-      title: t('value_o'),
-      description: t('value_o_text'),
-    },
-    {
-      letter: 'Y',
-      title: t('value_y'),
-      description: t('value_y_text'),
-    },
-    {
-      letter: 'A',
-      title: t('value_a'),
-      description: t('value_a_text'),
-    },
+    { letter: 'I', title: t('value_i'), description: t('value_i_text') },
+    { letter: 'N', title: t('value_n'), description: t('value_n_text') },
+    { letter: 'O', title: t('value_o'), description: t('value_o_text') },
+    { letter: 'Y', title: t('value_y'), description: t('value_y_text') },
+    { letter: 'A', title: t('value_a'), description: t('value_a_text') },
   ];
 
   return (
@@ -88,9 +68,7 @@ export default function AboutUsPage() {
           <div className="mb-16 rounded-lg bg-gray-50 p-8">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
               <div>
-                <h3 className="mb-6 text-2xl font-bold">
-                  Посетите нашу студию
-                </h3>
+                <h3 className="mb-6 text-2xl font-bold">{t('visit_studio')}</h3>
                 <div className="mb-4 flex items-start gap-3">
                   <MapPin className="mt-1 h-5 w-5 text-gray-600" />
                   <p className="text-gray-700">{t('studio_location')}</p>
@@ -113,30 +91,11 @@ export default function AboutUsPage() {
 
               <div className="aspect-video overflow-hidden rounded-lg bg-gray-200">
                 <img
-                  src="/placeholder.svg?height=400&width=600&text=Studio+Photo"
+                  src="adress.png"
                   alt="Inoyá Studio"
                   className="h-full w-full object-cover"
                 />
               </div>
-            </div>
-          </div>
-
-          {/* Gallery */}
-          <div className="text-center">
-            <h3 className="mb-12 text-3xl font-bold">Наши работы</h3>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {Array.from({ length: 8 }, (_, i) => (
-                <div
-                  key={i}
-                  className="aspect-square overflow-hidden rounded-lg bg-gray-100"
-                >
-                  <img
-                    src={`/placeholder.svg?height=400&width=400&text=Work+${i + 1}`}
-                    alt={`Work ${i + 1}`}
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-              ))}
             </div>
           </div>
         </div>

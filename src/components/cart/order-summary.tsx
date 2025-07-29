@@ -12,7 +12,7 @@ export function OrderSummary() {
   const [discount, setDiscount] = useState(0);
 
   const subtotal = getCartTotal();
-  const shipping = subtotal > 50000 ? 0 : 2000;
+  const shipping = subtotal > 200000 ? 0 : 2000;
   const total = subtotal - discount + shipping;
 
   const handleApplyPromo = () => {
@@ -80,7 +80,7 @@ export function OrderSummary() {
       {shipping > 0 && (
         <p className="mt-3 text-center text-sm text-gray-600">
           {t('free_shipping_notice', {
-            amount: (50000 - subtotal).toLocaleString(),
+            amount: (200000 - subtotal).toLocaleString(),
           })}
         </p>
       )}

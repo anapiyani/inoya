@@ -14,6 +14,7 @@ import {
 import { FilterSidebar } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/catalog-filter';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useProductsInfinite } from '@/hooks/use-prdocuts';
+import { useCurrency } from '@/lib/currency-context';
 import { useLanguage } from '@/lib/language-context';
 import { AlertCircle, Filter, Loader2, Search } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
@@ -156,6 +157,8 @@ function CatalogContent() {
     }
   };
 
+  const { formatPrice } = useCurrency();
+
   const products = useMemo(
     () => data?.pages.flatMap((p) => p.data.products) ?? [],
     [data]
@@ -192,8 +195,6 @@ function CatalogContent() {
       </div>
     );
   }
-
-
 
   return (
     <div className="min-h-screen bg-white">
@@ -313,7 +314,7 @@ function CatalogContent() {
                       key={product._id}
                       id={product._id}
                       image={product.photo?.[0] || '/placeholder.svg'}
-                      price={`$${product.price}`}
+                      price={formatPrice(product.price)}
                       title={product.name}
                       badge={product.badge === 'hit' ? 'hit' : undefined}
                       className={viewMode === 'list' ? 'flex flex-row' : ''}

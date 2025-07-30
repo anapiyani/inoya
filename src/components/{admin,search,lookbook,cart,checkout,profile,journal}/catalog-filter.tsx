@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { SUPPORTED_CURRENCIES, useCurrency } from '@/lib/currency-context';
 import { useLanguage } from '@/lib/language-context';
 import { X } from 'lucide-react';
 
@@ -27,6 +28,11 @@ export function FilterSidebar({
   onFiltersChange,
 }: FilterSidebarProps) {
   const { t } = useLanguage();
+  const { currency } = useCurrency();
+
+  const currencySymbol =
+    SUPPORTED_CURRENCIES[currency as keyof typeof SUPPORTED_CURRENCIES]
+      ?.symbol || currency;
 
   const categories = [
     { value: 'all', label: t('all') },
@@ -124,7 +130,7 @@ export function FilterSidebar({
                     }
                     className="w-24"
                   />
-                  <span>тг</span>
+                  <span>{currencySymbol}</span>
                 </div>
               </div>
             </div>

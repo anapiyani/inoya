@@ -3,10 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart-count-context';
 import { useLanguage } from '@/lib/language-context';
+import { useCurrency } from '@/lib/currency-context';
 import { useState } from 'react';
 
 export function OrderSummary() {
   const { t } = useLanguage();
+  const { formatPrice } = useCurrency();
   const { getCartTotal, cartItems } = useCart();
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -41,13 +43,13 @@ export function OrderSummary() {
           <span>
             {t('items_in_cart')} ({cartItems.length})
           </span>
-          <span>{subtotal.toLocaleString()} тг</span>
+          <span>{formatPrice(subtotal)}</span>
         </div>
 
         {discount > 0 && (
           <div className="flex justify-between text-green-600">
             <span>{t('discount')}</span>
-            <span>-{discount.toLocaleString()} тг</span>
+            <span>-{formatPrice(discount)}</span>
           </div>
         )}
 
@@ -56,14 +58,14 @@ export function OrderSummary() {
           <span>
             {shipping === 0
               ? t('free_shipping')
-              : `${shipping.toLocaleString()} тг`}
+              : formatPrice(shipping)}
           </span>
         </div>
 
         <div className="border-t pt-3">
           <div className="flex justify-between text-lg font-semibold">
             <span>{t('total')}</span>
-            <span>{total.toLocaleString()} тг</span>
+            <span>{formatPrice(total)}</span>
           </div>
         </div>
       </div>
@@ -80,7 +82,7 @@ export function OrderSummary() {
       {shipping > 0 && (
         <p className="mt-3 text-center text-sm text-gray-600">
           {t('free_shipping_notice', {
-            amount: (200000 - subtotal).toLocaleString(),
+            amount: formatPrice(200000 - subtotal),
           })}
         </p>
       )}

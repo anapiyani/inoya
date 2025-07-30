@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useProduct } from '@/hooks/use-product';
 import { useCart } from '@/lib/cart-count-context';
 import { useLanguage } from '@/lib/language-context';
+import { useCurrency } from '@/lib/currency-context';
 import { useWishlist } from '@/lib/wishlist-context';
 import {
   Heart,
@@ -61,6 +62,7 @@ interface ApiResponse {
 
 export default function ProductPage() {
   const { t } = useLanguage();
+  const { formatPrice } = useCurrency();
   const params = useParams();
   const productId = params.id as string;
 
@@ -216,7 +218,7 @@ export default function ProductPage() {
         id: product.id,
         name: product.name,
         image: product.images[0],
-        price: product.price.toLocaleString(),
+        price: formatPrice(product.price),
         badge: product.badge,
       });
     }
@@ -315,7 +317,7 @@ export default function ProductPage() {
 
               {/* Price */}
               <div className="text-3xl font-bold">
-                ${product.price}
+                {formatPrice(product.price)}
                 {!isInStock && (
                   <span className="ml-2 text-lg text-red-600">
                     ({t('out_of_stock')})

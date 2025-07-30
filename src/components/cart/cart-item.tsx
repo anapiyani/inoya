@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart-count-context';
 import { useWishlist } from '@/lib/wishlist-context';
+import { useCurrency } from '@/lib/currency-context';
 import { Heart, Minus, Plus, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,6 +25,7 @@ interface CartItemProps {
 export function CartItem({ item }: CartItemProps) {
   const { updateQuantity, removeFromCart } = useCart();
   const { addToWishlist } = useWishlist();
+  const { formatPrice } = useCurrency();
 
   const handleQuantityChange = (newQuantity: number) => {
     updateQuantity(item.id, newQuantity);
@@ -33,7 +35,7 @@ export function CartItem({ item }: CartItemProps) {
     addToWishlist({
       id: item.productId,
       name: item.name,
-      price: `${item.price.toLocaleString()} тг`,
+      price: formatPrice(item.price),
       image: item.image,
       badge: item.badge,
     });
@@ -75,7 +77,7 @@ export function CartItem({ item }: CartItemProps) {
               <p>Размер: {item.size}</p>
             </div>
             <p className="mt-2 text-lg font-semibold text-gray-900">
-              {item.price.toLocaleString()} тг
+              {formatPrice(item.price)}
             </p>
           </div>
 
@@ -126,7 +128,7 @@ export function CartItem({ item }: CartItemProps) {
         {/* Item Total */}
         <div className="mt-2 text-right">
           <p className="text-lg font-semibold">
-            {(item.price * item.quantity).toLocaleString()} тг
+            {formatPrice(item.price * item.quantity)}
           </p>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@/components/theme-provider';
+import { AuthProvider } from '@/lib/auth-context';
 import { CartProvider } from '@/lib/cart-count-context';
+import { CurrencyProvider } from '@/lib/currency-context';
 import { LanguageProvider } from '@/lib/language-context';
 import { WishlistProvider } from '@/lib/wishlist-context';
 import { ReactQueryProvider } from '@/provider/ReactQueryProvider';
@@ -32,10 +34,14 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <LanguageProvider>
-              <WishlistProvider>
-                <CartProvider>{children}</CartProvider>
-                <Toaster />
-              </WishlistProvider>
+              <AuthProvider>
+                <CurrencyProvider>
+                  <WishlistProvider>
+                    <CartProvider>{children}</CartProvider>
+                    <Toaster />
+                  </WishlistProvider>
+                </CurrencyProvider>
+              </AuthProvider>
             </LanguageProvider>
           </ThemeProvider>
         </ReactQueryProvider>

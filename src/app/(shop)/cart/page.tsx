@@ -4,43 +4,49 @@ import { CartItem } from '@/components/cart/cart-item';
 import { OrderSummary } from '@/components/cart/order-summary';
 import { Header } from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
-import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
 import { useCart } from '@/lib/cart-count-context';
+import { useCurrency } from '@/lib/currency-context';
 import { useLanguage } from '@/lib/language-context';
 import { ArrowLeft, ShoppingBag, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
-const recommendedProducts = [
+const recommendedProductsData = [
   {
     id: '7',
     name: 'Корсет кружевной',
-    price: '25 900 тг',
+    price: 25900,
     image: '/placeholder.svg?height=400&width=300',
   },
   {
     id: '8',
     name: 'Корсет атласный',
-    price: '19 900 тг',
+    price: 19900,
     image: '/placeholder.svg?height=400&width=300',
   },
   {
     id: '9',
     name: 'Корсет с пайетками',
-    price: '32 900 тг',
+    price: 32900,
     image: '/placeholder.svg?height=400&width=300',
     badge: 'new',
   },
   {
     id: '10',
     name: 'Корсет винтажный',
-    price: '28 900 тг',
+    price: 28900,
     image: '/placeholder.svg?height=400&width=300',
   },
 ];
 
 export default function CartPage() {
   const { t } = useLanguage();
+  const { formatPrice } = useCurrency();
   const { cartItems, clearCart } = useCart();
+
+  const recommendedProducts = recommendedProductsData.map((product) => ({
+    ...product,
+    price: formatPrice(product.price),
+  }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -144,7 +150,7 @@ export default function CartPage() {
           )}
 
           {/* Recommended Products */}
-          {cartItems.length > 0 && (
+          {/* {cartItems.length > 0 && (
             <div className="mt-16">
               <h3 className="mb-8 text-2xl font-bold">
                 {t('recommended_products')}
@@ -162,7 +168,7 @@ export default function CartPage() {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

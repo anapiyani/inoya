@@ -1,12 +1,15 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/lib/auth-context';
 import { useCart } from '@/lib/cart-count-context';
 import { useWishlist } from '@/lib/wishlist-context';
 import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { AuthModal } from '../auth/auth-modal';
+import { UserMenu } from '../auth/user-menu';
 import { MobileMenu } from '../{admin,search,lookbook,cart,checkout,profile,journal}/mobile-menu';
 
 export function Header() {
@@ -15,8 +18,10 @@ export function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [openInput, setOpenInput] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { wishlistItems } = useWishlist();
   const { getCartCount } = useCart();
+  const { user, isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
     const controlHeader = () => {
@@ -112,12 +117,31 @@ export function Header() {
                 )}
               </Button>
             </Link>
+            {!isLoading &&
+              (isAuthenticated ? (
+                <UserMenu />
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="text-sm"
+                >
+                  Войти
+                </Button>
+              ))}
           </div>
         </div>
       </header>
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
+      />
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
       />
     </>
   );

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/language-context';
 import { ChevronDown, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
+import { CurrencySelector } from '../ui/currency-selector';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -42,7 +43,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <div className="flex h-full flex-col">
           <div className="p-6">
             <div className="mb-8 flex items-center justify-between">
-              <h2 className="text-xl font-bold">INOYÁ</h2>
+              <div className="flex items-center space-x-2">
+                <h2 className="text-xl font-bold">INOYÁ</h2>
+                <CurrencySelector />
+              </div>
               <Button variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-6 w-6" />
               </Button>

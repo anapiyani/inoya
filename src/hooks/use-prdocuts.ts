@@ -1,5 +1,9 @@
 // hooks/use-products.tsx
-import { fetchProducts, ProductsParams } from '@/lib/api';
+import {
+  fetchFeaturedProducts,
+  fetchProducts,
+  ProductsParams,
+} from '@/lib/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export function useProductsInfinite(params: ProductsParams = {}) {
@@ -16,5 +20,21 @@ export function useProductsInfinite(params: ProductsParams = {}) {
     gcTime: 2 * 60 * 1000,
     refetchOnMount: true,
     retry: 2,
+  });
+}
+
+export function useFeaturedProductsInfinite(limit = 3) {
+  return useInfiniteQuery({
+    queryKey: ['featuredProducts', limit],
+    queryFn: ({ pageParam = 1 }: { pageParam?: number }) =>
+      fetchFeaturedProducts(pageParam, limit),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: any) => {
+      const pagination = lastPage.data.pagination;
+      if (pagination.page < pagination.pages) {
+        return pagination.page + 1;
+      }
+      return undefined;
+    },
   });
 }

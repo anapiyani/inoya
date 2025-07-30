@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/carousel';
 import { CategoryCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/category-card';
 import { ProductCard } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/product-card';
+import { useFeaturedProductsInfinite } from '@/hooks/use-prdocuts';
 import { useLanguage } from '@/lib/language-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -29,6 +30,19 @@ export default function HomePage() {
     { label: 'NEW', href: '#' },
     ...catalogItems,
   ]);
+  const [page, setPage] = useState(1);
+  const limit = 3;
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    error,
+  } = useFeaturedProductsInfinite(3);
+
+  const products = data?.pages.flatMap((page) => page.data.products) ?? [];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -143,37 +157,35 @@ export default function HomePage() {
               BESTSELLERS
             </h2>
 
+            {isLoading && <p className="text-center">Loading...</p>}
+            {error && (
+              <p className="text-center text-red-500">Error loading products</p>
+            )}
+
             <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-              <ProductCard
-                image="https://placeholder.pics/svg/500x400"
-                price="21 900 тг"
-                title="корсет"
-              />
-
-              <ProductCard
-                image="https://placeholder.pics/svg/500x400"
-                price="33 900 тг."
-                title="корсет new shine"
-                badge="hit"
-              />
-
-              <ProductCard
-                image="https://placeholder.pics/svg/500x400"
-                price="23 900 тг."
-                title="юбка корсетная"
-              />
-            </div>
-            <div className="mb-8 text-center">
-              <Button variant="outline" className="bg-transparent px-8 py-2">
-                {t('loadMore')}
-              </Button>
+              {products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  id={product._id}
+                  image={product.photo[0]}
+                  price={`${product.price} тг`}
+                  title={product.name}
+                />
+              ))}
             </div>
 
-            <div className="text-center">
-              <Button className="cursor-pointer bg-black px-12 py-3 text-lg text-white uppercase hover:bg-gray-800">
-                {t('go_to_the_catalog')}
-              </Button>
-            </div>
+            {hasNextPage && (
+              <div className="mb-8 text-center">
+                <Button
+                  variant="outline"
+                  className="bg-transparent px-8 py-2"
+                  onClick={() => fetchNextPage()}
+                  disabled={isFetchingNextPage}
+                >
+                  {isFetchingNextPage ? t('loading') : t('load_more')}
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 

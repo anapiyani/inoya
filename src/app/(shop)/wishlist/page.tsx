@@ -82,6 +82,7 @@ export default function WishlistPage() {
                 {wishlistItems.map((item) => (
                   <div key={item.id} className="group relative">
                     <ProductCard
+                      key={item.id}
                       id={item.id}
                       image={item.image}
                       price={item.price}

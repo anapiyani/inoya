@@ -113,3 +113,24 @@ export async function fetchProduct(id: string): Promise<{ product: Product }> {
     throw error;
   }
 }
+
+export async function fetchFeaturedProducts(
+  page: number = 1,
+  limit: number = 6
+): Promise<ProductsResponse> {
+  const url = `${API_BASE_URL}/products/featured?page=${page}&limit=${limit}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching featured products:', error);
+    throw error;
+  }
+}

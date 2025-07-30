@@ -156,6 +156,17 @@ function CatalogContent() {
     }
   };
 
+  const products = useMemo(
+    () => data?.pages.flatMap((p) => p.data.products) ?? [],
+    [data]
+  );
+  const totalProducts = data?.pages?.[0]?.data.pagination.total ?? 0;
+
+  const totalPages = data?.pages?.[0]?.data.pagination.pages || 1;
+  const availableCategories = data?.pages?.[0]?.data.filters?.categories || [];
+  const availableSubcategories =
+    data?.pages?.[0]?.data.filters?.subcategories || [];
+
   if (isError) {
     return (
       <div className="min-h-screen bg-white">
@@ -182,16 +193,7 @@ function CatalogContent() {
     );
   }
 
-  const products = useMemo(
-    () => data?.pages.flatMap((p) => p.data.products) ?? [],
-    [data]
-  );
-  const totalProducts = data?.pages?.[0]?.data.pagination.total ?? 0;
 
-  const totalPages = data?.pages?.[0]?.data.pagination.pages || 1;
-  const availableCategories = data?.pages?.[0]?.data.filters?.categories || [];
-  const availableSubcategories =
-    data?.pages?.[0]?.data.filters?.subcategories || [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -306,7 +308,7 @@ function CatalogContent() {
                       : 'space-y-4'
                   }
                 >
-                  {products.map((product: any) => (
+                  {products.map((product) => (
                     <ProductCard
                       key={product._id}
                       id={product._id}

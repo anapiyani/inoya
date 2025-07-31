@@ -12,7 +12,7 @@ export function useProductsInfinite(params: ProductsParams = {}) {
     queryFn: ({ pageParam = 1 }: { pageParam?: number }) =>
       fetchProducts({ ...params, page: pageParam, limit: 15 }),
     initialPageParam: 1,
-    getNextPageParam: (lastPage: any) => {
+    getNextPageParam: (lastPage) => {
       const { page, pages } = lastPage.data.pagination;
       return page < pages ? page + 1 : undefined;
     },
@@ -29,7 +29,7 @@ export function useFeaturedProductsInfinite(limit = 3) {
     queryFn: ({ pageParam = 1 }: { pageParam?: number }) =>
       fetchFeaturedProducts(pageParam, limit),
     initialPageParam: 1,
-    getNextPageParam: (lastPage: any) => {
+    getNextPageParam: (lastPage) => {
       const pagination = lastPage.data.pagination;
       if (pagination.page < pagination.pages) {
         return pagination.page + 1;

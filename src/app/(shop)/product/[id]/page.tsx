@@ -9,8 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useProduct } from '@/hooks/use-product';
 import { useCart } from '@/lib/cart-count-context';
-import { useLanguage } from '@/lib/language-context';
 import { useCurrency } from '@/lib/currency-context';
+import { useLanguage } from '@/lib/language-context';
 import { useWishlist } from '@/lib/wishlist-context';
 import {
   Heart,
@@ -21,6 +21,7 @@ import {
   Truck,
   Zap,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -282,13 +283,13 @@ export default function ProductPage() {
       <div className="pt-20">
         <div className="container mx-auto px-4 py-8">
           <nav className="mb-8 text-sm text-gray-600">
-            <a href="/" className="hover:text-gray-900">
+            <Link href="/" className="hover:text-gray-900">
               {t('home')}
-            </a>
+            </Link>
             <span className="mx-2">/</span>
-            <a href="/catalog" className="hover:text-gray-900">
+            <Link href="/catalog" className="hover:text-gray-900">
               {t('catalog')}
-            </a>
+            </Link>
             <span className="mx-2">/</span>
             <span className="text-gray-900">{product.name}</span>
           </nav>

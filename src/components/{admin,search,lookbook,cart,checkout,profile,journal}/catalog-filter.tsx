@@ -18,7 +18,7 @@ interface FilterSidebarProps {
     colors: string[];
     isNew: boolean;
   };
-  onFiltersChange: (filters: any) => void;
+  onFiltersChange: (filters: FilterSidebarProps['filters']) => void;
 }
 
 export function FilterSidebar({
@@ -140,7 +140,7 @@ export function FilterSidebar({
                   id="new-items"
                   checked={filters.isNew}
                   onCheckedChange={(checked) =>
-                    onFiltersChange({ ...filters, isNew: checked })
+                    onFiltersChange({ ...filters, isNew: checked === true })
                   }
                 />
                 <Label htmlFor="new-items" className="text-sm">

@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Product } from '@/lib/api';
 import { useLanguage } from '@/lib/language-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
@@ -43,7 +44,7 @@ interface InoyaGirl {
   name: string;
   description: string;
   images: string[];
-  products: any[];
+  products: Product[];
   location: string;
   profession: string;
   featured: boolean;
@@ -274,7 +275,12 @@ export default function InoyaGirlsPage() {
 
             <div className="flex flex-wrap items-center gap-4">
               {/* Sort */}
-              <Select value={sortBy} onValueChange={(v) => setSortBy(v as any)}>
+              <Select
+                value={sortBy}
+                onValueChange={(v) =>
+                  setSortBy(v as unknown as 'priority' | 'newest')
+                }
+              >
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder={t('girls.sort')} />
                 </SelectTrigger>

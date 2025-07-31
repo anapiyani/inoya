@@ -7,7 +7,7 @@ type Language = 'en' | 'ru';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string, params?: Record<string, any>) => string;
+  t: (key: string, params?: Record<string, unknown>) => string;
 }
 
 const translations = {
@@ -813,7 +813,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('language', lang);
   };
 
-  const t = (key: string, params?: Record<string, any>): string => {
+  const t = (key: string, params?: Record<string, unknown>): string => {
     let translation =
       translations[language][key as keyof typeof translations.en] || key;
 

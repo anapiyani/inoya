@@ -1,15 +1,15 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function formatPrice(price: number) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  }).format(price)
+  }).format(price);
 }
 
 export function formatDate(date: Date) {
@@ -17,31 +17,31 @@ export function formatDate(date: Date) {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }).format(date)
+  }).format(date);
 }
 
 export function generateSlug(text: string): string {
   return text
     .toLowerCase()
     .replace(/[^\w ]+/g, '')
-    .replace(/ +/g, '-')
+    .replace(/ +/g, '-');
 }
 
 export function calculateDiscount(price: number, salePrice: number): number {
-  return Math.round(((price - salePrice) / price) * 100)
+  return Math.round(((price - salePrice) / price) * 100);
 }
 
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: unknown[]) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout
+  let timeout: NodeJS.Timeout;
   return (...args: Parameters<T>) => {
-    clearTimeout(timeout)
-    timeout = setTimeout(() => func.apply(this, args), wait)
-  }
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
 }
 
 export function truncate(str: string, length: number): string {
-  return str.length > length ? `${str.substring(0, length)}...` : str
+  return str.length > length ? `${str.substring(0, length)}...` : str;
 }

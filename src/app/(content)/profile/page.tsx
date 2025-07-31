@@ -28,7 +28,6 @@ import {
   AlertCircle,
   CheckCircle,
   Clock,
-  CreditCard,
   Edit,
   Mail,
   MapPin,
@@ -258,6 +257,47 @@ export default function UserProfilePage() {
       toast.error('Ошибка при загрузке заказов');
     } finally {
       setLoadingOrders(false);
+    }
+  };
+
+  const cancelOrder = async (orderId: string) => {
+    if (!isAuthenticated) return;
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      toast.error('Не удалось получить токен авторизации');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/orders/${orderId}/cancel`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          toast.error('Срок действия сессии истёк. Пожалуйста, войдите снова.');
+          return;
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Заказ успешно отменён');
+        fetchOrders(1, false);
+        setSelectedOrder(null);
+        setIsOrderModalOpen(false);
+      } else {
+        toast.error(data.message || 'Не удалось отменить заказ');
+      }
+    } catch (error) {
+      console.error('Error cancelling order:', error);
+      toast.error('Ошибка при отмене заказа');
     }
   };
 
@@ -748,7 +788,7 @@ export default function UserProfilePage() {
                   <Separator />
 
                   {/* Order Summary */}
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-1">
                     <div>
                       <h3 className="mb-4 text-lg font-semibold">
                         Адрес доставки
@@ -769,49 +809,6 @@ export default function UserProfilePage() {
                             Тел: {selectedOrder.shippingAddress.phone}
                           </span>
                         </p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="mb-4 text-lg font-semibold">
-                        Детали заказа
-                      </h3>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex justify-between">
-                          <span>Способ оплаты:</span>
-                          <span className="flex items-center gap-1">
-                            <CreditCard className="h-3 w-3" />
-                            {paymentMethodLabels[selectedOrder.paymentMethod]}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Статус оплаты:</span>
-                          <span>
-                            {paymentStatusLabels[selectedOrder.paymentStatus]}
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Стоимость товаров:</span>
-                          <span>{formatPrice(selectedOrder.itemsPrice)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>Доставка:</span>
-                          <span>
-                            {formatPrice(selectedOrder.shippingPrice)}
-                          </span>
-                        </div>
-                        {selectedOrder.deliveredAt && (
-                          <div className="flex justify-between">
-                            <span>Дата доставки:</span>
-                            <span>{formatDate(selectedOrder.deliveredAt)}</span>
-                          </div>
-                        )}
-                        {selectedOrder.paidAt && (
-                          <div className="flex justify-between">
-                            <span>Дата оплаты:</span>
-                            <span>{formatDate(selectedOrder.paidAt)}</span>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </div>
@@ -841,7 +838,11 @@ export default function UserProfilePage() {
                   {/* Action Buttons */}
                   <div className="flex gap-3 pt-4">
                     {selectedOrder.orderStatus === 'pending' && (
-                      <Button variant="destructive" size="sm">
+                      <Button
+                        onClick={() => cancelOrder(selectedOrder._id)}
+                        variant="destructive"
+                        size="sm"
+                      >
                         Отменить заказ
                       </Button>
                     )}

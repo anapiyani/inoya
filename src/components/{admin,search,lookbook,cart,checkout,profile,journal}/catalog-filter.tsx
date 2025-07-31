@@ -124,7 +124,7 @@ export function FilterSidebar({
                         ...filters,
                         priceRange: [
                           filters.priceRange[0],
-                          Number.parseInt(e.target.value) || 100000,
+                          Number.parseInt(e.target.value) || 10000000,
                         ],
                       })
                     }

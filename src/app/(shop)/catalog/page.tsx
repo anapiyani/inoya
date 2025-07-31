@@ -72,7 +72,7 @@ function CatalogContent() {
   }, [filters, debouncedSearchQuery, sortBy, sortOrder]);
 
   const apiParams = useMemo(() => {
-    const params: Record<string, any> = {
+    const params: Record<string, unknown> = {
       page: currentPage,
       limit: 12,
     };

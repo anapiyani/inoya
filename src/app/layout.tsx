@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/lib/auth-context';
 import { CartProvider } from '@/lib/cart-count-context';
 import { CurrencyProvider } from '@/lib/currency-context';
@@ -27,23 +26,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ReactQueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <LanguageProvider>
-              <AuthProvider>
-                <CurrencyProvider>
-                  <WishlistProvider>
-                    <CartProvider>{children}</CartProvider>
-                    <Toaster />
-                  </WishlistProvider>
-                </CurrencyProvider>
-              </AuthProvider>
-            </LanguageProvider>
-          </ThemeProvider>
+          <LanguageProvider>
+            <AuthProvider>
+              <CurrencyProvider>
+                <WishlistProvider>
+                  <CartProvider>{children}</CartProvider>
+                  <Toaster />
+                </WishlistProvider>
+              </CurrencyProvider>
+            </AuthProvider>
+          </LanguageProvider>
         </ReactQueryProvider>
       </body>
     </html>

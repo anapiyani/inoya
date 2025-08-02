@@ -1,6 +1,8 @@
 'use client';
 
+import { AuthModal } from '@/components/auth/auth-modal';
 import { Header } from '@/components/layout/header';
+import { CheckoutModal } from '@/components/product/checkout';
 import { ColorSelector } from '@/components/product/color-selector';
 import { ImageGallery } from '@/components/product/image-gallery';
 import { QuantitySelector } from '@/components/product/quantity-selector';
@@ -75,8 +77,9 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  // Transform API data to component format
   const product = useMemo(() => {
     if (!apiResponse) return null;
 
@@ -124,7 +127,7 @@ export default function ProductPage() {
 
   const handleColorChange = (colorName: string) => {
     setSelectedColor(colorName);
-    setSelectedSize(''); // Reset size selection when color changes
+    setSelectedSize('');
   };
 
   const handleAddToCart = () => {
@@ -200,13 +203,11 @@ export default function ProductPage() {
       return;
     }
 
-    console.log('Buy now:', {
-      product: product?.name,
-      color: selectedColor,
-      size: selectedSize,
-      quantity,
-    });
-    alert('Переход к оформлению заказа...');
+    if (localStorage.getItem('accessToken')) {
+      setIsCheckoutModalOpen(true);
+    } else {
+      setIsAuthModalOpen(true);
+    }
   };
 
   const handleWishlistToggle = () => {
@@ -422,24 +423,28 @@ export default function ProductPage() {
             averageRating={product.averageRating}
             totalReviews={product.totalReviews}
           /> */}
-
-          {/* Similar Products - You'll need to implement this API call separately */}
-          {/* <div className="mt-16">
-            <h3 className="mb-8 text-2xl font-bold">{t('similar_products')}</h3>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {similarProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  image={product.image}
-                  price={product.price}
-                  title={product.name}
-                  badge={product.badge}
-                />
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
+      <CheckoutModal
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+        items={[
+          {
+            product: product.id,
+            name: product.name,
+            price: product.price,
+            quantity,
+            color: selectedColor,
+            size: selectedSize,
+            photo: product.images[0],
+          },
+        ]}
+        totalPrice={product.price * quantity}
+      />
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </div>
   );
 }

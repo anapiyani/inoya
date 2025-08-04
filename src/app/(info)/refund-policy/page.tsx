@@ -78,6 +78,12 @@ export default function RefundPolicyPage() {
             </div>
           </div>
 
+          <div className="mb-16">
+            <h2 className="mb-8 text-center text-3xl font-bold">
+              {t('refund_policy')}
+            </h2>
+          </div>
+
           {/* Return Process */}
           <div className="mb-16">
             <h2 className="mb-8 text-center text-3xl font-bold">

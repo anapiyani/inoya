@@ -239,9 +239,9 @@ export function CheckoutModal({
 
   const isFreeDeliveryEligible = (): boolean => {
     if (shippingAddress.country === 'Kazakhstan') {
-      return totalPrice >= 200000; // ≥ 200 000 ₸
+      return totalPrice >= 200000;
     }
-    return totalPrice / USD_TO_KZT >= 600; // ≥ $600
+    return totalPrice / USD_TO_KZT >= 600;
   };
 
   const getDeliveryPrice = (opt: DeliveryOption): number =>

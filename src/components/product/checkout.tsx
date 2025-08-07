@@ -85,11 +85,22 @@ const DELIVERY_OPTIONS: DeliveryOption[] = [
   {
     key: 'cdek',
     name: 'CDEK',
-    description: 'СНГ, Россия, Беларусь, Узбекистан, Кыргызстан',
+    description:
+      'СНГ, Азербайджан, Армения, Беларусь, Казахстан, Кыргызстан, Молдова, Россия, Таджикистан, Узбекистан, Украина',
     price: 20,
     currency: 'USD',
-    timeframe: '4-7 дней',
-    countries: ['Russia', 'Belarus', 'Uzbekistan', 'Kyrgyzstan'],
+    timeframe: '5-10 дней',
+    countries: [
+      'Russia',
+      'Belarus',
+      'Uzbekistan',
+      'Kyrgyzstan',
+      'Kazakhstan',
+      'Armenia',
+      'Moldova',
+      'Tajikistan',
+      'Ukraine',
+    ],
     icon: <Truck className="h-5 w-5" />,
   },
   {
@@ -162,7 +173,7 @@ export function CheckoutModal({
     address: '',
     city: '',
     postalCode: '',
-    country: 'Kazakhstan',
+    country: '',
     phone: '',
   });
 

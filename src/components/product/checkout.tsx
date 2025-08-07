@@ -177,51 +177,89 @@ export function CheckoutModal({
   /* ------------------------------------------------------------------
    *  Countries / cities (lazy-load & cache)
    * ----------------------------------------------------------------- */
-  const BASE = 'https://countriesnow.space/api/v0.1/countries';
-  const countryCache = useRef<Array<{ value: string; label: string }>>([]);
-  const cityCache = useRef<Record<string, string[]>>({});
+  type Option = { value: string; label: string };
 
-  const loadCountryOptions = useCallback(async (inputValue: string) => {
-    if (countryCache.current.length === 0) {
+  const countryCache = useRef<Record<string, Option[]>>({});
+  const cityCache = useRef<Record<string, Option[]>>({});
+
+  const loadCountryOptions = useCallback(
+    async (inputValue: string): Promise<Option[]> => {
+      const q = inputValue.trim();
+
+      // don’t query until the user types ≥ 1 char
+      if (q.length === 0) return [];
+
+      // cached?
+      if (countryCache.current[q]) return countryCache.current[q];
+
       try {
-        const res = await fetch(`${BASE}/iso`);
-        const { data } = await res.json();
-        countryCache.current = data.map((c: any) => ({
-          value: c.name,
-          label: c.name,
-        }));
-      } catch (error) {
-        console.error('Failed to load countries', error);
+        const url = `https://restcountries.com/v3.1/name/${encodeURIComponent(q)}?fields=name`;
+        const res = await fetch(url);
+
+        if (!res.ok) return [];
+
+        const data = await res.json(); // [{ name: { common } }]
+        const opts: Option[] = data
+          .map((c: { name: { common: string } }) => ({
+            value: c.name.common,
+            label: c.name.common,
+          }))
+          // dedupe & alpha-sort
+          .filter(
+            (v: Option, i: number, arr: Option[]) =>
+              arr.findIndex((o) => o.value === v.value) === i
+          )
+          .sort((a: Option, b: Option) => a.label.localeCompare(b.label));
+
+        countryCache.current[q] = opts;
+        return opts;
+      } catch (err) {
+        console.error('Country search failed', err);
+        countryCache.current[q] = [];
+        return [];
       }
-    }
-    return countryCache.current.filter((c) =>
-      c.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
-  }, []);
+    },
+    []
+  );
 
   const loadCityOptions = useCallback(
-    async (inputValue: string) => {
-      if (!shippingAddress.country) return [];
+    async (inputValue: string): Promise<Option[]> => {
+      const country = shippingAddress.country; // current country
+      const q = inputValue.trim();
 
-      if (!cityCache.current[shippingAddress.country]) {
-        try {
-          const res = await fetch(`${BASE}/cities`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ country: shippingAddress.country }),
-          });
-          const { data } = await res.json();
-          cityCache.current[shippingAddress.country] = data as string[];
-        } catch (error) {
-          console.error('Failed to load cities', error);
-          cityCache.current[shippingAddress.country] = [];
-        }
+      if (!country || q.length < 2) return []; // wait until 2 chars typed
+
+      const key = `${country}|${q.toLowerCase()}`;
+      if (cityCache.current[key]) return cityCache.current[key];
+
+      try {
+        const url =
+          `https://geocoding-api.open-meteo.com/v1/search` +
+          `?name=${encodeURIComponent(q)}&count=25&language=en`;
+
+        const res = await fetch(url);
+        if (!res.ok) return [];
+
+        const { results = [] } = await res.json();
+
+        const opts: Option[] = results
+          .filter((r: { country: string }) => r.country === country) // keep only chosen country
+          .map((r: { name: string }) => ({ value: r.name, label: r.name }))
+          // dedupe and alpha-sort
+          .filter(
+            (v: Option, i: number, arr: Option[]) =>
+              arr.findIndex((o) => o.value === v.value) === i
+          )
+          .sort((a: Option, b: Option) => a.label.localeCompare(b.label))
+          .slice(0, 50); // keep dropdown light
+
+        cityCache.current[key] = opts;
+        return opts;
+      } catch (err) {
+        console.error('City search failed', err);
+        cityCache.current[key] = [];
+        return [];
       }
-
-      return cityCache.current[shippingAddress.country]
-        .filter((city) => city.toLowerCase().includes(inputValue.toLowerCase()))
-        .slice(0, 50)
-        .map((c) => ({ value: c, label: c }));
     },
     [shippingAddress.country]
   );
@@ -468,7 +506,6 @@ export function CheckoutModal({
                       <Label htmlFor="country">Страна *</Label>
                       <AsyncSelect
                         cacheOptions
-                        defaultOptions
                         loadOptions={loadCountryOptions}
                         value={
                           shippingAddress.country
@@ -495,7 +532,6 @@ export function CheckoutModal({
                         key={shippingAddress.country}
                         isDisabled={!shippingAddress.country}
                         cacheOptions
-                        defaultOptions
                         loadOptions={loadCityOptions}
                         value={
                           shippingAddress.city

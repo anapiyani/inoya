@@ -86,7 +86,7 @@ const DELIVERY_OPTIONS: DeliveryOption[] = [
     key: 'cdek',
     name: 'CDEK',
     description:
-      'СНГ, Азербайджан, Армения, Беларусь, Казахстан, Кыргызстан, Молдова, Россия, Таджикистан, Узбекистан, Украина',
+      'СНГ, Азербайджан, Армения, Беларусь, Кыргызстан, Молдова, Россия, Таджикистан, Узбекистан, Украина',
     price: 20,
     currency: 'USD',
     timeframe: '5-10 дней',
@@ -95,7 +95,6 @@ const DELIVERY_OPTIONS: DeliveryOption[] = [
       'Belarus',
       'Uzbekistan',
       'Kyrgyzstan',
-      'Kazakhstan',
       'Armenia',
       'Moldova',
       'Tajikistan',

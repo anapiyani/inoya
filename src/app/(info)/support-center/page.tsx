@@ -36,7 +36,7 @@ export default function SupportCenterPage() {
     {
       icon: <Instagram className="h-6 w-6" />,
       title: 'Instagram',
-      value: '@inoya_official',
+      value: '@inoya_brand',
       description: t('follow_and_ask'),
     },
   ];

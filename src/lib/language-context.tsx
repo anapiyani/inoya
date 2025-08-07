@@ -395,6 +395,165 @@ const translations = {
     'girls.aboutClient': 'About the client',
 
     'auth.pleaseLogin': 'Please log in to like posts',
+    // New content for the form and initial policy
+    how_to_return_exchange: 'How to process a return or exchange?',
+    return_exchange_quality_intro:
+      'Returns and exchanges of goods of inadequate quality, purchased in standard sizes, are possible within 14 days from the date of receipt of the order. For successful returns or exchanges, the original packaging of the goods, tags, and labels must be preserved. The product itself must show no signs of wear. Please, when trying on the product for the first time, wear it over underwear. We reserve the right to refuse a return or exchange of an item that shows signs of wear and does not meet the criteria listed above.',
+    custom_items_no_return:
+      'Items custom-made to individual parameters are not subject to return or exchange.',
+    refund_of_funds: 'Refund of Funds',
+    refund_process_details:
+      "After the item for return or exchange is received, it will be inspected for compliance with the criteria within 1-3 business days. You will be additionally notified of the inspection results by email. If the return or exchange is accepted, the funds will be credited to your account within 7-10 business days, depending on your bank's transaction processing time.",
+    inoya_slogan:
+      'To arrange a return or exchange, please fill out the feedback form:',
+    email_label: 'Email',
+    phone_label: 'Phone Number',
+    attach_photos_label: 'Attach photos (up to 5 photos)',
+    submit_request: 'Submit Request',
+    file_upload_placeholder: 'Choose files...',
+    selected_files: 'Selected files:',
+    // Detailed policy points (from user's long text)
+    policy_general_provisions: 'General Provisions',
+    policy_1_1:
+      'Exchange of goods of proper quality is possible if its commercial appearance (packaging, seals, labels, etc.), consumer properties are preserved, and there is a document confirming the fact of purchase of the goods (receipt, electronic document, order form, confirmation of money transfer).',
+    policy_1_2:
+      'In case of exchange of goods of proper quality, delivery costs from the Seller to the Buyer are paid by the Buyer. The cost of delivery of the returned goods to the Seller is not compensated to the Buyer.',
+    policy_1_3:
+      'For the return or exchange of defective goods for an analogous one, the Buyer is obliged to inform us about the problem by any convenient means of communication.',
+    policy_1_4:
+      "Refunds for returned goods are made within 10 business days from the date of their receipt at the Seller's warehouse, in accordance with the legislation of the Republic of Kazakhstan (Article 21 of the Law of the Republic of Kazakhstan 'On Consumer Protection').",
+    policy_1_5:
+      "Refunds are made to the Buyer's bank account if the order was paid online, or to the account whose details are specified in the online Return Application form if payment was made upon receipt of the goods.",
+    policy_1_6:
+      "If an analogous product is not available for sale at the time of the Buyer's request, the Buyer has the right to refuse to execute this Agreement and demand a refund of the amount paid for the goods. The Seller is obliged to return the money within 10 business days from the date of return of the goods.",
+    policy_1_7:
+      "The Buyer has the right to demand a full refund of the order amount, including delivery, if the order has not been transferred to the delivery service and is still in the store's warehouse https://inoyamodern.com.",
+    policy_1_8:
+      "Changes to the Buyer's personal data or order composition are made free of charge if the paid order has not yet left the store's warehouse and has not been transferred to the delivery service. Otherwise, delivery costs are not compensated.",
+    policy_return_quality_goods: '2. Return of Goods of Proper Quality',
+    policy_2_1:
+      "The Client has the right to request a return of goods presented in the Seller's catalog at any time before receiving it. Within 14 calendar days from the date of receipt of the goods (excluding the day of receipt), the Client can exchange goods of proper quality, provided the following conditions are met:",
+    policy_2_1_bullet_1:
+      'Preservation of the commercial appearance of the goods (packaging, seals, labels, etc.);',
+    policy_2_1_bullet_2: 'The goods have not been used (no signs of use);',
+    policy_2_1_bullet_3:
+      'Preservation of the consumer properties of the goods;',
+    policy_2_1_bullet_4:
+      'Availability of purchase confirmation (receipt, order form, invoice) if the goods were purchased elsewhere than the official online store https://inoyamodern.com.',
+    policy_2_2:
+      "When exchanging goods of proper quality, delivery of the goods from the Client to the Seller is at the Client's expense.",
+    policy_2_3:
+      'To make an exchange or return of goods, the Client must fill out the online form available on the website https://inoyamodern.com.',
+    policy_2_4:
+      "After filling out the form, the Client must wait for the claim to be reviewed, which takes no more than 2 business days. As a result of the review, the Client will be informed via SMS and e-mail, where detailed instructions for the Client's further actions will also be sent in case of a positive decision on the appeal.",
+    policy_2_5:
+      'After receiving notification of the claim review, the Client must send the goods back to the Seller within 7 business days, using one of the following methods:',
+    policy_2_5_bullet_1:
+      'International mail (return address will be provided upon return processing);',
+    policy_2_5_bullet_2:
+      'Kazakhstan Post (return address will be provided upon return processing);',
+    policy_2_5_bullet_3:
+      'SDEK transport company (return address will be provided upon return processing);',
+    policy_2_5_bullet_4:
+      "In person at the Seller's address (exact address in Almaty will be provided upon return processing).",
+    policy_2_6:
+      'Some items from the assortment may not be subject to return if they are provided in proper condition.',
+    policy_2_6_items:
+      'Such items include: underwear, cosmetic products, personal use items, and items belonging to the corset category. However, the Seller reserves the right to individually consider each situation but is not obliged to return items of this category.',
+    policy_exchange_defective_goods: '3. Exchange of Defective Goods',
+    policy_3_1:
+      'The period for exchanging defective goods is 90 calendar days from the date of receipt of the goods, excluding the day of receipt. This is the warranty period declared by the manufacturer.',
+    policy_3_2: 'Warranty cases do not include:',
+    policy_3_2_bullet_1:
+      'Mechanical damage that objectively could not have occurred under normal conditions of use, such as cuts, tears, damage from external objects;',
+    policy_3_2_bullet_2: 'Stains, scuffs, signs of product use;',
+    policy_3_2_bullet_3:
+      'Seam divergence caused by improper use of the product;',
+    policy_3_2_bullet_4: 'Mechanical damage not related to product use.',
+    policy_3_2_guarantee_cases: 'Warranty cases include:',
+    policy_3_2_guarantee_bullet_1: 'Absence of hooks or fasteners;',
+    policy_3_2_guarantee_bullet_2: 'Breakage of stiffening ribs;',
+    policy_3_2_guarantee_bullet_3:
+      'Material tearing if the stiffening ribs came out of their slots;',
+    policy_3_2_guarantee_bullet_4:
+      'Fabric defect used in product manufacturing;',
+    policy_3_2_guarantee_bullet_5:
+      'Involuntary damage, tears, seam divergence during normal use.',
+    policy_3_3:
+      'To return or exchange defective goods, the Client must fill out the online form available at https://inoyamodern.com/vozvrat-obmen.',
+    policy_3_4:
+      'After filling out the form, the Client must wait for the claim to be reviewed. The review period is no more than 2 business days. After reviewing the application, the Client will be notified via SMS or e-mail, where detailed instructions for further actions will be provided if the appeal receives a positive decision.',
+    policy_3_5:
+      'After receiving notification of the claim review, the Client must send the goods back to the Seller within 7 business days. This can be done via:',
+    policy_3_5_bullet_1: 'Kazakhstan Post (specify return address),',
+    policy_3_5_bullet_2: 'International mail (specify return address),',
+    policy_3_5_bullet_3: 'SDEK transport company (specify return address),',
+    policy_3_5_bullet_4:
+      "In person at the Seller's address in Almaty (specify exact address).",
+    policy_3_5_delivery_cost:
+      "When returning defective goods, delivery is at the Seller's expense.",
+    policy_3_6:
+      'The Client has the right to conduct an independent examination of the goods to identify manufacturing defects if the Seller disagrees with the cause of the defect.',
+    policy_3_7:
+      "The Seller also has the right to conduct an independent examination of the goods to identify signs of use and manufacturing defects. If the Seller's fault in the manufacturing defect is confirmed, the cost of the examination will be compensated to the Buyer.",
+    policy_3_8: 'Partial Replacement Policy',
+    policy_3_8_desc:
+      'If the item consists of several parts or a set, and only one element is damaged, partial return or exchange of only the damaged element is possible.',
+    policy_3_9: 'Terms of Return and Exchange in Case of Packaging Damage',
+    policy_3_9_desc:
+      'Upon receipt of the goods, the Client is obliged to check the goods and packaging for damage. In case of detection of damage to the packaging or goods, the Client undertakes to immediately inform the Seller.',
+    policy_grounds_for_refusal: '4. Grounds for Refusal to Accept a Claim',
+    policy_4_1:
+      'The store https://inoyamodern.com does not consider and does not accept claims regarding goods that show signs of use, including (but not limited to) dirt, traces of biological origin, mechanical damage, deformation, violation of the integrity of the goods, absence or damage to labels, tags, stickers on the packaging, as well as non-compliance with the declared product volume (in the case of cosmetics - signs of use).',
+    policy_4_2:
+      "In case of detection of the above signs of use, the client's application (claim) will not be satisfied, and funds will not be returned.",
+    policy_4_3:
+      'Goods purchased on promotion are subject to return only if a defect or defect caused by the manufacturer is found.',
+    policy_4_4: 'Custom-made goods',
+    policy_4_4_desc:
+      'If the goods were manufactured according to individually defined characteristics (for example, by customer order, with unique sizes, color, or other personalized elements), the client is not entitled to refuse such goods, even if they meet all declared qualities.',
+    policy_4_5: 'Responsibility for Return of Goods',
+    policy_4_5_desc:
+      'Until the goods are received by the Seller, responsibility for the safety of the goods during return lies with the Client. In case of damage to the goods during the return process, the Client bears responsibility for the damage.',
+    policy_agreement_confirmation:
+      'By placing an order through the website https://inoyamodern.com, you confirm your voluntary agreement with these Return and Exchange Rules set forth above.',
+    // New Delivery and Payment content
+    delivery_and_payment_title: 'Delivery and Payment',
+    delivery_methods_title: 'Delivery Methods',
+    delivery_method_courier: 'Courier service (RIKA, CDEK, Kazpost, etc.)',
+    delivery_method_international_mail: 'International mail',
+    delivery_method_express: 'Express delivery (upon request)',
+    delivery_cost_time_title: 'Delivery Cost and Time',
+    delivery_cost_auto_calc:
+      'Delivery cost is calculated automatically during checkout, depending on your location.',
+    delivery_time_varies:
+      'Delivery time may vary depending on the region and selected delivery method.',
+    delivery_free_kz: 'Free delivery in Kazakhstan — for orders from 100,000₸',
+    delivery_free_international:
+      'Free delivery to other countries — for orders from $600. For smaller amounts — $50.',
+    delivery_terms_title: 'Delivery Terms',
+    delivery_terms_order_processing:
+      'Order processing: 1 to 3 business days after full payment.',
+    delivery_terms_holidays:
+      'Terms depend on the chosen delivery service and may increase during holidays.',
+    how_to_receive_order_title: 'How to receive an order?',
+    how_to_receive_post:
+      'Post office: pick up at the collection point by your postal code.',
+    how_to_receive_courier:
+      'Courier delivery: the courier will contact you in advance to confirm the time.',
+    cancellation_return_title: 'Cancellation and Return',
+    cancellation_return_shipping_cost:
+      'If the order has already been transferred to the transport company, the buyer pays for transportation costs.',
+    cancellation_return_policy_link:
+      "Returns are possible within 14 days from the date of receipt (see 'Return and Exchange' section for return conditions).",
+    payment_methods_main_title: 'Payment Methods',
+    payment_methods_intro: 'We accept the following payment methods:',
+    payment_e_wallets: 'Electronic wallets: PayPal, Google Pay, Apple Pay',
+    payment_for_russia:
+      'For clients from Russia: Payment via Sberbank, Alfa-Bank, VTB, Tinkoff, etc. (details can be obtained by writing to WhatsApp or Telegram).',
+    support_contacts_title: 'Support Contacts',
+    support_email: 'Email:',
+    support_phone: 'Phone: +7 771 141 08 48',
   },
   ru: {
     'nav.home': 'Главная',
@@ -793,6 +952,170 @@ const translations = {
     'girls.aboutClient': 'О клиентке',
 
     'auth.pleaseLogin': 'Пожалуйста, войдите в систему, чтобы ставить лайки',
+    // New content for the form and initial policy
+    how_to_return_exchange: 'Как оформить возврат или обмен?',
+    return_exchange_quality_intro:
+      'Возврат и обмен товара ненадлежащего качества, купленного в стандартных размерах, возможен в течение 14 дней с момента получения заказа. Для успешных возврата или обмена первоначальная упаковка товара, бирки и ярлыки должны быть сохранены. На самом товаре должны отсутствовать следы носки. Пожалуйста, при первой примерке товара надевайте его поверх нижнего белья. Мы оставляем за собой право отказать в возврате или обмене изделия, которое содержит признаки носки и не соответствует перечисленным выше критериям.',
+    custom_items_no_return:
+      'Изделия, сшитые по индивидуальных параметрам, возврату и обмену не подлежат.',
+    refund_of_funds: 'Возврат средств',
+    refund_process_details:
+      'После того, как товар для возврата или обмена будет получен, в течение 1-3 рабочих дней он будет проверен на соответствие критериям. О результатах проверки вы будете уведомлены дополнительно по электронной почте. Если возврат или обмен принят, денежные средства поступят на счет в течение 7-10 рабочих дней в зависимости от процесса обработки операций вашим банком.',
+    inoya_slogan:
+      'Для оформления возврата или обмена заполните форму обратной связи:',
+    email_label: 'Почта',
+    phone_label: 'Номер телефона',
+    attach_photos_label: 'Прикрепить фотографии (до 5 шт.)',
+    submit_request: 'Отправить запрос',
+    file_upload_placeholder: 'Выберите файлы...',
+    selected_files: 'Выбранные файлы:',
+
+    // Detailed policy points (from user's long text)
+    policy_general_provisions: 'Общие положения',
+    policy_1_1:
+      'Обмен товара надлежащего качества возможен, если сохранены его товарный вид (упаковка, пломбы, ярлыки и т.д.), потребительские свойства, а также имеется документ, подтверждающий факт покупки товара (чек, электронный документ, бланк заказа, подтверждение перевода денежных средств).',
+    policy_1_2:
+      'В случае обмена товара надлежащего качества, расходы на доставку товара от Продавца до Покупателя оплачиваются Покупателем. Стоимость доставки возвращаемого товара Продавцу Покупателю не компенсируется.',
+    policy_1_3:
+      'Для возврата или обмена бракованного товара на аналогичный, Покупатель обязан сообщить нам о проблеме любым удобным способом связи.',
+    policy_1_4:
+      'Возврат денежных средств за возвращенный товар производится в течение 10 рабочих дней с момента его поступления на склад Продавца, в соответствии с законодательством РК (ст. 21 Закона РК «О защите прав потребителей»).',
+    policy_1_5:
+      'Возврат денежных средств осуществляется на расчетный счет Покупателя, если заказ был оплачен онлайн, или на счёт, реквизиты которого указаны в онлайн форме Заявления на возврат, если оплата была произведена при получении товара.',
+    policy_1_6:
+      'Если аналогичный товар отсутствует в продаже на момент обращения Покупателя, Покупатель вправе отказаться от исполнения настоящего Соглашения и потребовать возврата уплаченной суммы за товар. Продавец обязан вернуть деньги в течение 10 рабочих дней с момента возврата товара.',
+    policy_1_7:
+      'Покупатель вправе потребовать возврат полной суммы заказа, включая доставку, если заказ не был передан в службу доставки и еще находится на складе магазина https://inoyamodern.com.',
+    policy_1_8:
+      'Изменения персональных данных Покупателя или состава заказа производятся бесплатно, если оплаченный заказ еще не покинул склад магазина и не был передан в службу доставки. В противном случае затраты на доставку не компенсируются.',
+    policy_return_quality_goods: '2. Возврат товара надлежащего качества',
+    policy_2_1:
+      'Клиент вправе запросить возврат товара, представленного в каталоге Продавца, в любое время до его получения. В течение 14 календарных дней с момента получения товара (не считая дня получения) Клиент может осуществить обмен товара надлежащего качества при соблюдении следующих условий:',
+    policy_2_1_bullet_1:
+      'Сохранение товарного вида товара (упаковка, пломбы, ярлыки и т.д.);',
+    policy_2_1_bullet_2:
+      'Товар не был в употреблении (отсутствуют следы использования);',
+    policy_2_1_bullet_3: 'Сохранение потребительских свойств товара;',
+    policy_2_1_bullet_4:
+      'Наличие подтверждения покупки (чек, бланк заказа, накладная) в случае, если товар был приобретен в других местах реализации, кроме официального интернет-магазина https://inoyamodern.com.',
+    policy_2_2:
+      'При обмене товара надлежащего качества доставка товара от Клиента к Продавцу осуществляется за счет Клиента.',
+    policy_2_3:
+      'Для осуществления обмена или возврата товара Клиенту необходимо заполнить онлайн форму, доступную на сайте https://inoyamodern.com.',
+    policy_2_4:
+      'После заполнения формы Клиент должен дождаться рассмотрения претензии, срок которой составляет не более 2 рабочих дней. В результате рассмотрения заявки Клиент будет проинформирован через SMS и e-mail, куда также будет направлена подробная инструкция по дальнейшим действиям Клиента в случае положительного решения по обращению.',
+    policy_2_5:
+      'После получения уведомления о рассмотрении претензии, в течение 7 рабочих дней Клиенту необходимо отправить товар обратно Продавцу, воспользовавшись одним из следующих способов:',
+    policy_2_5_bullet_1:
+      'Международная почта (адрес для возврата будет предоставлен при оформлении возврата);',
+    policy_2_5_bullet_2:
+      'Почта Казахстана (адрес для возврата будет предоставлен при оформлении возврата);',
+    policy_2_5_bullet_3:
+      'Транспортная компания СДЭК (адрес для возврата будет предоставлен при оформлении возврата);',
+    policy_2_5_bullet_4:
+      'Лично по адресу Продавца (точный адрес в Алматы будет предоставлен при оформлении возврата).',
+    policy_2_6:
+      'Некоторые товары из ассортимента могут не подлежать возврату, если они предоставлены в надлежащем состоянии.',
+    policy_2_6_items:
+      'К таким товарам относятся: нижнее белье, косметические средства, товары для личного использования и товары, относящиеся к категории корсетных изделий. При этом Продавец оставляет за собой право индивидуально рассматривать каждую ситуацию, но не обязан осуществлять возврат товаров данной категории.',
+    policy_exchange_defective_goods: '3. Обмен товара ненадлежащего качества',
+    policy_3_1:
+      'Срок обмена бракованного товара составляет 90 календарных дней с даты получения товара, не считая дня получения. Это срок гарантии, заявленный производителем.',
+    policy_3_2: 'К гарантийным случаям не относятся:',
+    policy_3_2_bullet_1:
+      'Механические повреждения, которые объективно не могли возникнуть при обычных условиях использования, такие как порезы, разрывы, повреждения от воздействия сторонних предметов;',
+    policy_3_2_bullet_2: 'Пятна, потертости, следы использования товара;',
+    policy_3_2_bullet_3:
+      'Расхождение швов, вызванное неправильным использованием товара;',
+    policy_3_2_bullet_4:
+      'Механические повреждения, не связанные с использованием товара.',
+    policy_3_2_guarantee_cases: 'К гарантийным случаям относятся:',
+    policy_3_2_guarantee_bullet_1: 'Отсутствие крючков или застежек;',
+    policy_3_2_guarantee_bullet_2: 'Поломка ребер жесткости;',
+    policy_3_2_guarantee_bullet_3:
+      'Разрыв материала в случае, если ребра жесткости вылезли из пазов;',
+    policy_3_2_guarantee_bullet_4:
+      'Брак ткани, используемой при производстве товара;',
+    policy_3_2_guarantee_bullet_5:
+      'Непроизвольные повреждения, разрывы, расхождение швов в процессе обычного использования.',
+    policy_3_3:
+      'Для возврата или обмена товара ненадлежащего качества Клиенту необходимо заполнить онлайн форму, доступную по адресу https://inoyamodern.com/vozvrat-obmen.',
+    policy_3_4:
+      'После заполнения формы Клиент должен дождаться рассмотрения претензии. Срок рассмотрения — не более 2 рабочих дней. После рассмотрения заявки Клиент будет уведомлен по SMS или e-mail, где будет указана подробная инструкция по дальнейшим действиям, если обращение получит положительное решение.',
+    policy_3_5:
+      'После получения уведомления о рассмотрении претензии Клиенту необходимо отправить товар обратно Продавцу в течение 7 рабочих дней. Это можно сделать через:',
+    policy_3_5_bullet_1: 'Почту Казахстана (указать адрес для возврата),',
+    policy_3_5_bullet_2: 'Международную почту (указать адрес для возврата),',
+    policy_3_5_bullet_3:
+      'Транспортную компанию СДЭК (указать адрес для возврата),',
+    policy_3_5_bullet_4:
+      'Лично по адресу Продавца в Алматы (указать точный адрес).',
+    policy_3_5_delivery_cost:
+      'При возврате товара ненадлежащего качества доставка осуществляется за счет Продавца.',
+    policy_3_6:
+      'Клиент имеет право на проведение независимой экспертизы товара для выявления производственного брака, если Продавец не согласен с причиной возникновения дефекта.',
+    policy_3_7:
+      'Продавец также имеет право провести независимую экспертизу товара для выявления следов использования и производственного брака. В случае, если виновность Продавца в производственном браке будет подтверждена, стоимость проведения экспертизы будет компенсирована Покупателю.',
+    policy_3_8: 'Политика по частичной замене',
+    policy_3_8_desc:
+      'Если товар состоит из нескольких частей или комплекта, и поврежден только один элемент, возможно частичное возвращение или обмен только поврежденного элемента.',
+    policy_3_9: 'Условия возврата и обмена в случае повреждения упаковки',
+    policy_3_9_desc:
+      'При получении товара Клиент обязан проверить товар и упаковку на наличие повреждений. В случае обнаружения повреждений упаковки или товара, Клиент обязуется немедленно сообщить об этом Продавцу.',
+    policy_grounds_for_refusal: '4. Основания для отказа в приеме претензии',
+    policy_4_1:
+      'Магазин https://inoyamodern.com не рассматривает и не принимает претензии в отношении товара, который имеет следы использования, включая (но не ограничиваясь) грязь, следы биологического происхождения, механические повреждения, деформацию, нарушение целостности товара, отсутствие или повреждение ярлыков, бирок, стикеров на упаковке, а также несоответствие заявленному объему продукта (в случае с косметикой — следы использования).',
+    policy_4_2:
+      'В случае обнаружения вышеперечисленных следов использования, заявление (претензия) клиента не будет удовлетворено, а денежные средства не возвращаются.',
+    policy_4_3:
+      'Товар, приобретенный по акции, подлежит возврату только в случае выявления дефекта или брака, возникшего по вине производителя.',
+    policy_4_4: 'Товары, изготовленные по индивидуальному заказу',
+    policy_4_4_desc:
+      'Если товар был изготовлен по индивидуально-определенным характеристикам (например, по заказу клиента, с уникальными размерами, цветом или другими персонализированными элементами), клиент не вправе отказаться от такого товара, даже если он соответствует всем заявленным качествам.',
+    policy_4_5: 'Ответственность за возврат товара',
+    policy_4_5_desc:
+      'До момента получения товара Продавцом, ответственность за сохранность товара при возврате лежит на Клиенте. В случае повреждения товара в процессе возврата, ответственность за повреждения несет Клиент.',
+    policy_agreement_confirmation:
+      'Оформляя заказ через сайт https://inoyamodern.com, вы подтверждаете свое добровольное согласие с данными Правилами возврата и обмена товара, изложенными выше.',
+
+    // New Delivery and Payment content
+    delivery_and_payment_title: 'Доставка и Оплата',
+    delivery_methods_title: 'Способы доставки',
+    delivery_method_courier: 'Курьерская служба (RIKA, CDEK, Kazpost и т.д.)',
+    delivery_method_international_mail: 'Международная почта',
+    delivery_method_express: 'Экспресс доставка (по запросу)',
+    delivery_cost_time_title: 'Стоимость и время доставки',
+    delivery_cost_auto_calc:
+      'Стоимость доставки рассчитывается автоматически в процессе оформления заказа, в зависимости от вашего местоположения.',
+    delivery_time_varies:
+      'Время доставки может варьироваться в зависимости от региона и выбранного способа доставки.',
+    delivery_free_kz:
+      'Бесплатная доставка по Казахстану — для заказов от 100 000₸',
+    delivery_free_international:
+      'Бесплатная доставка в другие страны — для заказов от 600$. Для меньших сумм — 50$.',
+    delivery_terms_title: 'Сроки доставки',
+    delivery_terms_order_processing:
+      'Формирование заказа: от 1 до 3 рабочих дней после полной оплаты.',
+    delivery_terms_holidays:
+      'Сроки зависят от выбранной службы доставки и могут увеличиться в праздничные дни.',
+    how_to_receive_order_title: 'Как получить заказ?',
+    how_to_receive_post:
+      'Почта: получение в пункте выдачи по вашему почтовому индексу.',
+    how_to_receive_courier:
+      'Курьерская доставка: курьер свяжется с вами заранее для уточнения времени.',
+    cancellation_return_title: 'Отмена и возврат',
+    cancellation_return_shipping_cost:
+      'Если заказ уже передан в транспортную компанию, покупатель оплачивает транспортные расходы.',
+    cancellation_return_policy_link:
+      'Возврат товара возможен в течение 14 дней с момента получения (условия для возврата смотрите в разделе «Возврат и обмен»).',
+    payment_methods_main_title: 'Способы оплаты', // Renamed to avoid conflict with existing payment_methods
+    payment_methods_intro: 'Мы принимаем следующие способы оплаты:',
+    payment_e_wallets: 'Электронные кошельки: PayPal, Google Pay, Apple Pay',
+    payment_for_russia:
+      'Для клиентов из России: Оплата через Сбербанк, Альфа-Банк, ВТБ, Тинькофф и т.д. (реквизиты можно получить, написав в WhatsApp или Telegram).',
+    support_contacts_title: 'Контакты службы поддержки',
+    support_email: 'Email:',
+    support_phone: 'Телефон: +7 771 141 08 48',
   },
 };
 

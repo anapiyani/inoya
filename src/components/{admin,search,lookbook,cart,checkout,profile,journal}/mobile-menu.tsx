@@ -3,6 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/language-context';
 import { ChevronDown, ChevronRight, X } from 'lucide-react';
+import { Great_Vibes } from 'next/font/google';
+import Link from 'next/link';
 import { useState } from 'react';
 import { CurrencySelector } from '../ui/currency-selector';
 
@@ -10,6 +12,11 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: '400',
+});
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const { language, setLanguage, t } = useLanguage();
@@ -44,7 +51,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="p-6">
             <div className="mb-8 flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <h2 className="text-xl font-bold">INOYÁ</h2>
+                <Link
+                  href="/"
+                  className={`${greatVibes.className} text-[28px] leading-none tracking-wide`}
+                >
+                  Inoyá
+                </Link>
                 <CurrencySelector />
               </div>
               <Button variant="ghost" size="icon" onClick={onClose}>

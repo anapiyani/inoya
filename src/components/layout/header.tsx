@@ -5,12 +5,18 @@ import { useAuth } from '@/lib/auth-context';
 import { useCart } from '@/lib/cart-count-context';
 import { useWishlist } from '@/lib/wishlist-context';
 import { Heart, Menu, Search, ShoppingBag } from 'lucide-react';
+import { Great_Vibes } from 'next/font/google';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AuthModal } from '../auth/auth-modal';
 import { UserMenu } from '../auth/user-menu';
 import { MobileMenu } from '../{admin,search,lookbook,cart,checkout,profile,journal}/mobile-menu';
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: '400',
+});
 
 export function Header() {
   const router = useRouter();
@@ -58,14 +64,12 @@ export function Header() {
             <Menu className="h-6 w-6" />
           </Button>
 
-          <h1
-            className="cursor-pointer text-2xl font-bold tracking-wider"
-            onClick={() => {
-              router.push('/');
-            }}
+          <Link
+            href="/"
+            className={`${greatVibes.className} text-[28px] leading-none tracking-wide`}
           >
-            INOYÁ
-          </h1>
+            Inoyá
+          </Link>
 
           <div className="flex items-center space-x-2">
             {openInput ? (

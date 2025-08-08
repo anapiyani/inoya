@@ -115,7 +115,7 @@ export default function DeliveryPaymentPage() {
               <p>
                 {t('cancellation_return_policy_link')}{' '}
                 <Link
-                  href="/refund-exchange"
+                  href="/refund-policy"
                   className="text-blue-600 hover:underline"
                 >
                   {t('refund_policy')}

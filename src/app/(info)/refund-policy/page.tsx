@@ -1,7 +1,6 @@
 'use client';
 
 import { Header } from '@/components/layout/header';
-import { RefundExchangeForm } from '@/components/{admin,search,lookbook,cart,checkout,profile,journal}/refund-exchange-form';
 import { useLanguage } from '@/lib/language-context';
 import { AlertCircle, Clock, RotateCcw, Shield } from 'lucide-react';
 import { Great_Vibes } from 'next/font/google';
@@ -62,9 +61,16 @@ export default function RefundExchangePolicyPage() {
               {t('how_to_return_exchange')}
             </h2>
             <p className="mx-auto mb-8 max-w-3xl text-center text-lg text-gray-700">
-              {t('inoya_slogan')}
+              {t('how_to_return_exchange_desc')}
             </p>
-            <RefundExchangeForm />
+            <ol className="mx-auto mb-8 max-w-3xl list-decimal space-y-2 pl-6 text-left text-gray-700">
+              <li>{t('return_step_1')}</li>
+              <li>{t('return_step_2')}</li>
+              <li>{t('return_step_3')}</li>
+              <li>{t('return_step_4')}</li>
+              <li>{t('return_step_5')}</li>
+              <li>{t('return_step_6')}</li>
+            </ol>
           </div>
 
           {/* Initial Policy Text */}

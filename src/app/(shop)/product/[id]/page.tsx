@@ -1,8 +1,8 @@
 'use client';
 
+import { CheckoutModal } from '@/app/(shop)/checkout/checkout';
 import { AuthModal } from '@/components/auth/auth-modal';
 import { Header } from '@/components/layout/header';
-import { CheckoutModal } from '@/components/product/checkout';
 import { ColorSelector } from '@/components/product/color-selector';
 import { ImageGallery } from '@/components/product/image-gallery';
 import { QuantitySelector } from '@/components/product/quantity-selector';

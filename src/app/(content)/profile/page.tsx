@@ -7,6 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
@@ -21,6 +23,7 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/lib/auth-context';
 import { useCurrency } from '@/lib/currency-context';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -159,6 +162,13 @@ export default function UserProfilePage() {
   // Modal state
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
+  const [returnForm, setReturnForm] = useState({
+    reason: '',
+    description: '',
+    photos: [] as File[],
+  });
+  const [isSubmittingReturn, setIsSubmittingReturn] = useState(false);
 
   // Filters
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -172,7 +182,6 @@ export default function UserProfilePage() {
   const fetchUserProfile = async () => {
     try {
       setLoading(true);
-
       if (authUser) {
         const userProfile: UserProfile = {
           _id: authUser._id,
@@ -182,7 +191,6 @@ export default function UserProfilePage() {
           createdAt: authUser.createdAt,
           updatedAt: authUser.updatedAt,
         };
-
         setUser(userProfile);
         setEditForm(userProfile);
       }
@@ -197,23 +205,18 @@ export default function UserProfilePage() {
   // Fetch orders from API
   const fetchOrders = async (page = 1, append = false) => {
     if (!isAuthenticated) return;
-
     try {
       if (page === 1) setLoadingOrders(true);
-
       const token = localStorage.getItem('accessToken');
       if (!token) {
         toast.error('Не удалось получить токен авторизации');
         return;
       }
-
       const params = new URLSearchParams({
         page: page.toString(),
         limit: limit.toString(),
       });
-
       console.log('Fetching orders with params:', params.toString());
-
       const response = await fetch(
         `${API_BASE_URL}/orders/my-orders?${params}`,
         {
@@ -235,19 +238,16 @@ export default function UserProfilePage() {
 
       const data: OrdersResponse = await response.json();
       console.log('Orders response:', data);
-
       if (data.success) {
         const filteredOrders =
           statusFilter === 'all'
             ? data.data
             : data.data.filter((order) => order.orderStatus === statusFilter);
-
         if (append) {
           setOrders((prev) => [...prev, ...filteredOrders]);
         } else {
           setOrders(filteredOrders);
         }
-
         setPagination(data.pagination);
       } else {
         toast.error('Не удалось загрузить заказы');
@@ -267,7 +267,6 @@ export default function UserProfilePage() {
       toast.error('Не удалось получить токен авторизации');
       return;
     }
-
     try {
       const response = await fetch(`${API_BASE_URL}/orders/${orderId}/cancel`, {
         method: 'PATCH',
@@ -286,7 +285,6 @@ export default function UserProfilePage() {
       }
 
       const data = await response.json();
-
       if (data.success) {
         toast.success('Заказ успешно отменён');
         fetchOrders(1, false);
@@ -304,14 +302,12 @@ export default function UserProfilePage() {
   // Update user profile
   const handleSaveProfile = async () => {
     if (!editForm || !isAuthenticated) return;
-
     try {
       const token = localStorage.getItem('accessToken');
       if (!token) {
         toast.error('Не удалось получить токен авторизации');
         return;
       }
-
       // API call to update user profile
       const response = await fetch(`${API_BASE_URL}/users/${editForm._id}`, {
         method: 'PUT',
@@ -331,7 +327,6 @@ export default function UserProfilePage() {
       }
 
       const data = await response.json();
-
       if (data.success) {
         setUser(editForm);
         setIsEditing(false);
@@ -342,6 +337,87 @@ export default function UserProfilePage() {
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('Не удалось обновить профиль');
+    }
+  };
+
+  const handleReturnSubmit = async () => {
+    if (!selectedOrder) return;
+    if (!returnForm.reason || !returnForm.description) {
+      toast.error('Пожалуйста, заполните все обязательные поля.');
+      return;
+    }
+    if (returnForm.photos.length === 0) {
+      toast.error('Пожалуйста, загрузите хотя бы одно фото.');
+      return;
+    }
+    if (returnForm.photos.length > 10) {
+      toast.error('Вы можете загрузить не более 10 фотографий.');
+      return;
+    }
+    const totalPhotosSize = returnForm.photos.reduce(
+      (acc, file) => acc + file.size,
+      0
+    );
+    if (totalPhotosSize > 5 * 1024 * 1024) {
+      // 5MB
+      toast.error('Общий размер фотографий не должен превышать 5 МБ.');
+      return;
+    }
+
+    setIsSubmittingReturn(true);
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      toast.error('Не удалось получить токен авторизации');
+      setIsSubmittingReturn(false);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('orderId', selectedOrder._id);
+    formData.append('reason', returnForm.reason);
+    formData.append('description', returnForm.description);
+    returnForm.photos.forEach((file) => {
+      formData.append('photos', file);
+    });
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/returns`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          // 'Content-Type': 'multipart/form-data' is automatically set by browser when using FormData
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(
+          errorData.message || `HTTP error! status: ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Запрос на возврат успешно создан!');
+        closeReturnModal();
+        closeOrderModal();
+        fetchOrders(1, false); // Refresh orders
+      } else {
+        toast.error(data.message || 'Не удалось создать запрос на возврат.');
+      }
+    } catch (error: any) {
+      console.error('Error submitting return request:', error);
+      toast.error(error.message || 'Ошибка при создании запроса на возврат.');
+    } finally {
+      setIsSubmittingReturn(false);
+    }
+  };
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      setReturnForm((prev) => ({ ...prev, photos: filesArray }));
     }
   };
 
@@ -366,6 +442,17 @@ export default function UserProfilePage() {
   const closeOrderModal = () => {
     setIsOrderModalOpen(false);
     setSelectedOrder(null);
+  };
+
+  const openReturnModal = () => {
+    setIsOrderModalOpen(false); // Close order details modal
+    setIsReturnModalOpen(true);
+    setReturnForm({ reason: '', description: '', photos: [] }); // Reset form
+  };
+
+  const closeReturnModal = () => {
+    setIsReturnModalOpen(false);
+    setReturnForm({ reason: '', description: '', photos: [] });
   };
 
   const formatDate = (dateString: string) => {
@@ -437,7 +524,6 @@ export default function UserProfilePage() {
   return (
     <div className="bg-background min-h-screen">
       <Header />
-
       {/* Page Header */}
       <header className="bg-background mt-24 border-b px-4 py-6">
         <div className="container mx-auto">
@@ -451,7 +537,6 @@ export default function UserProfilePage() {
           </div>
         </div>
       </header>
-
       <main className="container mx-auto px-4 py-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Profile Information */}
@@ -516,7 +601,6 @@ export default function UserProfilePage() {
                         <p className="text-sm font-medium">{user?.name}</p>
                       )}
                     </div>
-
                     {/* Email */}
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
@@ -538,7 +622,6 @@ export default function UserProfilePage() {
                         </p>
                       )}
                     </div>
-
                     {/* Phone */}
                     <div className="space-y-2">
                       <Label htmlFor="phone">Телефон</Label>
@@ -559,9 +642,7 @@ export default function UserProfilePage() {
                         </p>
                       )}
                     </div>
-
                     <Separator />
-
                     {/* Registration Date */}
                     <div className="text-muted-foreground text-xs">
                       <p>Регистрация: {user && formatDate(user.createdAt)}</p>
@@ -572,7 +653,6 @@ export default function UserProfilePage() {
               </CardContent>
             </Card>
           </div>
-
           {/* Orders Section */}
           <div className="lg:col-span-2">
             <Card>
@@ -582,7 +662,6 @@ export default function UserProfilePage() {
                     <Package className="h-5 w-5" />
                     Мои заказы ({pagination.totalOrders})
                   </CardTitle>
-
                   {/* Filters */}
                   <div className="flex gap-2">
                     <Select
@@ -654,13 +733,14 @@ export default function UserProfilePage() {
                                   </p>
                                 </div>
                                 <Badge
-                                  className={`${statusColors[order.orderStatus]} flex items-center gap-1`}
+                                  className={`${
+                                    statusColors[order.orderStatus]
+                                  } flex items-center gap-1`}
                                 >
                                   {getStatusIcon(order.orderStatus)}
                                   {statusLabels[order.orderStatus]}
                                 </Badge>
                               </div>
-
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
                                   <span className="text-muted-foreground text-sm">
@@ -681,7 +761,6 @@ export default function UserProfilePage() {
                         </motion.div>
                       ))}
                     </AnimatePresence>
-
                     {/* Pagination */}
                     {pagination.totalPages > 1 && (
                       <div className="flex items-center justify-center gap-2 pt-4">
@@ -724,7 +803,6 @@ export default function UserProfilePage() {
           </div>
         </div>
       </main>
-
       {/* Order Details Modal */}
       <Dialog open={isOrderModalOpen} onOpenChange={setIsOrderModalOpen}>
         <DialogContent className="max-h-[90vh] w-full p-0">
@@ -741,15 +819,16 @@ export default function UserProfilePage() {
                     </p>
                   </div>
                   <Badge
-                    className={`${statusColors[selectedOrder.orderStatus]} flex items-center gap-1`}
+                    className={`${
+                      statusColors[selectedOrder.orderStatus]
+                    } flex items-center gap-1`}
                   >
                     {getStatusIcon(selectedOrder.orderStatus)}
                     {statusLabels[selectedOrder.orderStatus]}
                   </Badge>
                 </div>
               </DialogHeader>
-
-              <div className="max-h-[calc(100vh-200px)] flex-1 overflow-y-auto p-6">
+              <div className="max-h-[calc(100vh-30 0px)] flex-1 overflow-y-auto p-6">
                 <div className="space-y-6">
                   {/* Order Items */}
                   <div>
@@ -784,9 +863,7 @@ export default function UserProfilePage() {
                       ))}
                     </div>
                   </div>
-
                   <Separator />
-
                   {/* Order Summary */}
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-1">
                     <div>
@@ -812,9 +889,7 @@ export default function UserProfilePage() {
                       </div>
                     </div>
                   </div>
-
                   <Separator />
-
                   {/* Order Total */}
                   <div className="bg-muted/50 rounded-lg p-4">
                     <div className="flex items-center justify-between">
@@ -824,7 +899,6 @@ export default function UserProfilePage() {
                       </span>
                     </div>
                   </div>
-
                   {/* Notes */}
                   {selectedOrder.notes && (
                     <div>
@@ -834,7 +908,6 @@ export default function UserProfilePage() {
                       </p>
                     </div>
                   )}
-
                   {/* Action Buttons */}
                   <div className="flex gap-3 pt-4">
                     {selectedOrder.orderStatus === 'pending' && (
@@ -846,10 +919,9 @@ export default function UserProfilePage() {
                         Отменить заказ
                       </Button>
                     )}
-
                     {selectedOrder.orderStatus === 'delivered' && (
-                      <Button variant="outline" size="sm">
-                        Оставить отзыв
+                      <Button onClick={openReturnModal} size="sm">
+                        Вернуть/Обменять
                       </Button>
                     )}
                   </div>
@@ -857,6 +929,84 @@ export default function UserProfilePage() {
               </div>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Return Request Modal */}
+      <Dialog open={isReturnModalOpen} onOpenChange={setIsReturnModalOpen}>
+        <DialogContent className="sm:max-w-[480px]">
+          <DialogHeader>
+            <DialogTitle>Запрос на возврат/обмен</DialogTitle>
+            <DialogDescription>
+              Пожалуйста, заполните форму для создания запроса на возврат или
+              обмен.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="reason">Причина возврата/обмена</Label>
+              <Select
+                value={returnForm.reason}
+                onValueChange={(value) =>
+                  setReturnForm((prev) => ({ ...prev, reason: value }))
+                }
+              >
+                <SelectTrigger id="reason">
+                  <SelectValue placeholder="Выберите причину" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Не подошел размер">
+                    Не подошел размер
+                  </SelectItem>
+                  <SelectItem value="Брак">Брак</SelectItem>
+                  <SelectItem value="Передумал">Передумал</SelectItem>
+                  <SelectItem value="Другое">Другое</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="description">
+                Подробное описание (минимум 10 символов)
+              </Label>
+              <Textarea
+                id="description"
+                placeholder="Опишите проблему или причину возврата"
+                value={returnForm.description}
+                onChange={(e) =>
+                  setReturnForm((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }))
+                }
+                rows={4}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="photos">
+                Фотографии (до 10, макс. 5МБ каждая)
+              </Label>
+              <Input
+                id="photos"
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handlePhotoChange}
+              />
+              {returnForm.photos.length > 0 && (
+                <div className="text-muted-foreground text-sm">
+                  Выбрано файлов: {returnForm.photos.length}
+                </div>
+              )}
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={closeReturnModal}>
+              Отмена
+            </Button>
+            <Button onClick={handleReturnSubmit} disabled={isSubmittingReturn}>
+              {isSubmittingReturn ? 'Отправка...' : 'Отправить запрос'}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

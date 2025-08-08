@@ -2,8 +2,8 @@
 
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart-count-context';
-import { useLanguage } from '@/lib/language-context';
 import { useCurrency } from '@/lib/currency-context';
+import { useLanguage } from '@/lib/language-context';
 import { useState } from 'react';
 
 export function OrderSummary() {
@@ -56,9 +56,7 @@ export function OrderSummary() {
         <div className="flex justify-between">
           <span>{t('shipping')}</span>
           <span>
-            {shipping === 0
-              ? t('free_shipping')
-              : formatPrice(shipping)}
+            {shipping === 0 ? t('free_shipping') : formatPrice(shipping)}
           </span>
         </div>
 
@@ -70,7 +68,6 @@ export function OrderSummary() {
         </div>
       </div>
 
-      {/* Checkout Button */}
       <Button
         onClick={handleCheckout}
         className="mt-6 w-full bg-black py-3 text-white hover:bg-gray-800"
@@ -78,7 +75,6 @@ export function OrderSummary() {
         {t('checkout')}
       </Button>
 
-      {/* Free Shipping Notice */}
       {shipping > 0 && (
         <p className="mt-3 text-center text-sm text-gray-600">
           {t('free_shipping_notice', {

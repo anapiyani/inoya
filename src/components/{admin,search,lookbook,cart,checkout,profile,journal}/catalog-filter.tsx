@@ -50,7 +50,7 @@ export function FilterSidebar({
     <>
       {isOpen && (
         <div
-          className="bg-opacity-50 fixed inset-0 z-20 bg-black lg:hidden"
+          className="bg-opacity-50 fixed inset-0 z-20 lg:hidden"
           onClick={onClose}
         />
       )}

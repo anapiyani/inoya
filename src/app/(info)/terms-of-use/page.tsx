@@ -377,12 +377,7 @@ export default function PrivacyPolicyPage() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Mail className="h-4 w-4 text-primary" />
-                  <span className="text-sm">privacy@example.com</span>
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-primary" />
-                  <span className="text-sm">+7 (XXX) XXX-XX-XX</span>
+                  <span className="text-sm">inoyainfo@gmail.com</span>
                 </div>
                 
                 <div className="flex items-start gap-3">
@@ -390,8 +385,7 @@ export default function PrivacyPolicyPage() {
                   <div className="text-sm">
                     <p>Юридический адрес:</p>
                     <p className="text-muted-foreground">
-                      г. Москва, ул. Примерная, д. 1, офис 100<br />
-                      Индекс: 123456
+                      {t("adress_of_the_company")}<br />
                     </p>
                   </div>
                 </div>

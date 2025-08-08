@@ -9,6 +9,7 @@ interface ProductCardProps {
   price: string;
   title: string;
   badge?: string;
+  no_color?: boolean;
   className?: string;
   showWishlistButton?: boolean;
 }
@@ -19,17 +20,13 @@ export function ProductCard({
   price,
   title,
   badge,
+  no_color,
   className,
   showWishlistButton = true,
 }: ProductCardProps) {
   const cardContent = (
     <div className={`group relative cursor-pointer ${className}`}>
       <div className="relative mb-4 aspect-[3/4] overflow-hidden bg-gray-100">
-        {badge && (
-          <div className="absolute top-4 right-4 z-10 rounded-full bg-black px-3 py-1 text-sm text-white">
-            {badge}
-          </div>
-        )}
         {showWishlistButton && id && (
           <div className="absolute top-2 left-2 z-10 opacity-0 transition-opacity group-hover:opacity-100">
             <WishlistButton

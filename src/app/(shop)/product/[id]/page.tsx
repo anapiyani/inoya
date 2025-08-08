@@ -95,9 +95,8 @@ export default function ProductPage() {
       badge: apiProduct.badge,
       category: apiProduct.category,
       subcategory: apiProduct.subcategory,
-      isNew: false, // You can add logic to determine if product is new
+      isNew: false,
       isActive: apiProduct.isActive,
-      // Mock data for features not in API
       averageRating: 4.5,
       totalReviews: 128,
       reviews: [

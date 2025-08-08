@@ -48,17 +48,17 @@ export function FilterSidebar({
 
   return (
     <>
+      {/* Overlay covers the whole page when sidebar is open */}
       {isOpen && (
-        <div
-          className="bg-opacity-50 fixed inset-0 z-20 lg:hidden"
-          onClick={onClose}
-        />
+        <div className="bg-opacity-50 fixed inset-0 z-20" onClick={onClose} />
       )}
 
+      {/* Sidebar is fixed to the left and covers full height */}
       <div
-        className={`fixed top-0 left-0 z-10 h-full w-80 transform bg-white transition-transform duration-300 ease-in-out lg:relative lg:w-64 lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-30 h-full w-80 transform bg-white transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        } lg:relative lg:w-64 lg:translate-x-0`}
+        onClick={(e) => e.stopPropagation()} // Prevent overlay click from closing when clicking inside sidebar
       >
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between border-b p-4 lg:hidden">

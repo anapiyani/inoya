@@ -157,6 +157,13 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 >
                   {t('refund_policy')}
                 </a>
+                 <a
+                  href="/terms-of-use"
+                  className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
+                  onClick={onClose}
+                >
+                  {t('privacy_policy')}
+                </a>
                 <a
                   href="/support-center"
                   className="mt-2 block text-sm text-gray-600 hover:text-gray-800"
